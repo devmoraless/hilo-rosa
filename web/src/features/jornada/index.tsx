@@ -146,7 +146,7 @@ export default function Jornada() {
                   {pending} {pending === 1 ? "pendiente" : "pendientes"} de sincronizar
                 </Chip>
               ) : (
-                <Chip tone="ok" size="md">
+                <Chip tone="neutral" size="md">
                   0 pendientes · todo sincronizado
                 </Chip>
               )}
@@ -183,7 +183,7 @@ export default function Jornada() {
       {stage === "search" && (
         <>
           <Card>
-            <div className="grid gap-4">
+            <div className="grid gap-4 sm:grid-cols-[2fr_1fr]">
               <Field
                 label="Nombre de la paciente"
                 value={nombre}
@@ -199,7 +199,7 @@ export default function Jornada() {
                 inputMode="numeric"
                 placeholder="Ej. 1974"
                 autoComplete="off"
-                hint="Opcional: ayuda a distinguir a dos pacientes con el mismo nombre."
+                hint="Opcional, separa homónimas."
               />
             </div>
           </Card>
@@ -448,9 +448,6 @@ function IssuedCard({ who, issued, pending, online, onNext }: { who: Who; issued
             <p>
               El registro de <b>{name}</b> está guardado. {online ? "Enviando…" : "Se enviará solo cuando vuelva la red."}
             </p>
-            <Chip tone="warn" size="md">
-              {pending} {pending === 1 ? "pendiente" : "pendientes"} de sincronizar
-            </Chip>
           </>
         )}
         {synced && issued.qrToken && issued.folio && (
