@@ -16,12 +16,12 @@ const ROL: Record<string, string> = {
 
 const CSS = `
 .bt { display: grid; gap: var(--sp-4); min-width: 0; }
-.bt-seal { border-radius: var(--r-md); padding: var(--sp-4) var(--sp-5); font-size: var(--fs-3); font-weight: 700; line-height: 1.25; overflow-wrap: anywhere; }
+.bt-seal { border-radius: var(--r-md); padding: var(--sp-4) var(--sp-5); font-size: var(--fs-4); font-weight: 700; line-height: 1.25; overflow-wrap: anywhere; }
 .bt-seal--ok { background: color-mix(in srgb, var(--ok) 12%, var(--surface)); color: var(--ok); border: 2px solid var(--ok); }
 .bt-seal--bad { background: color-mix(in srgb, var(--bad) 10%, var(--surface)); color: var(--bad); border: 2px solid var(--bad); }
 .bt-seal small { display: block; font-size: var(--fs-1); font-weight: 400; color: var(--text-2); margin-top: var(--sp-1); }
 .bt-list { list-style: none; margin: 0; padding: 0; display: grid; }
-.bt-row { display: grid; grid-template-columns: 7.5em minmax(0, 1fr) auto; gap: var(--sp-2) var(--sp-4); align-items: baseline; padding: var(--sp-3) 0; border-top: 1px solid var(--line); }
+.bt-row { display: grid; grid-template-columns: 8.5em minmax(0, 1fr) auto; gap: var(--sp-2) var(--sp-4); align-items: baseline; padding: var(--sp-3) 0; border-top: 1px solid var(--line); }
 .bt-row--bad { background: color-mix(in srgb, var(--bad) 8%, transparent); border-left: 4px solid var(--bad); padding-left: var(--sp-3); }
 .bt-when { color: var(--text-2); font-size: var(--fs-1); font-variant-numeric: tabular-nums; }
 .bt-what { min-width: 0; overflow-wrap: anywhere; }
@@ -34,7 +34,7 @@ const CSS = `
 @media (max-width: 640px) {
   .bt-row { grid-template-columns: minmax(0, 1fr); gap: var(--sp-1); }
   .bt-chain { white-space: normal; overflow-wrap: anywhere; }
-  .bt-seal { font-size: var(--fs-2); padding: var(--sp-3) var(--sp-4); }
+  .bt-seal { font-size: var(--fs-3); padding: var(--sp-3) var(--sp-4); }
 }
 `;
 
