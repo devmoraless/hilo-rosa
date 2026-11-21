@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Header, HTTPException
+from fastapi import APIRouter, Depends, Header, HTTPException, Response
 from sqlmodel import Session, select
 
 from app.db import TrustedContact
@@ -58,3 +58,21 @@ def results(s: SessionDep, authorization: Annotated[str | None, Header()] = None
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(401, "Verifica tu identidad para ver el resultado.")
     return access.results(s, authorization[7:])
+
+
+@router.get("/me/results/{result_id}/pdf")
+def patient_pdf(
+    result_id: str,
+    s: SessionDep,
+    authorization: Annotated[str | None, Header()] = None,
+):
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(401, "Verifica tu identidad para ver el resultado.")
+    return Response(
+        access.patient_pdf(s, authorization[7:], result_id),
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition": 'inline; filename="resultado.pdf"',
+            "Cache-Control": "no-store",
+        },
+    )

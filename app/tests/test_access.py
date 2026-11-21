@@ -1,5 +1,10 @@
+from io import BytesIO
+
+import httpx
 import pytest
 from fastapi.testclient import TestClient
+from pypdf import PdfReader
+from sqlmodel import select
 
 from app.db import Patient, Result
 from app.fixtures.seed_data import LAURA, MARIA
@@ -120,7 +125,7 @@ def test_trusted_contact_view_is_logged_in_audit(access_client):
     assert response.status_code == 200
     assert [r["id"] for r in response.json()] == ["visible"]
     assert response.json()[0]["explicacion_clara"] == "Tu resultado salió normal"
-    assert response.json()[0]["pdf_url"] == "/api/results/visible/pdf"
+    assert response.json()[0]["pdf_url"] == "/api/access/me/results/visible/pdf"
     audit = client.get("/api/audit").json()
     assert audit["integridad_ok"] is True
     assert audit["entries"][-1]["accion"] == "visto por Laura (hija)"
@@ -220,3 +225,109 @@ def test_audit_allows_staff(access_client, role):
     response = client.get("/api/audit", headers={"X-Demo-Role": role})
     assert response.status_code == 200
     assert response.json()["integridad_ok"] is True
+
+
+@pytest.mark.parametrize("telegram_fails", [False, True])
+def test_configured_telegram_never_exposes_demo_code(
+    access_client, monkeypatch, telegram_fails
+):
+    from app.config import settings
+
+    client, _ = access_client
+    monkeypatch.setattr(settings, "telegram_bot_token", "test-token")
+    monkeypatch.setattr(settings, "telegram_demo_chat_id", "test-chat")
+    deliveries = []
+
+    def send(url, **kwargs):
+        deliveries.append(kwargs["json"])
+        if telegram_fails:
+            raise httpx.ConnectError("offline")
+        return httpx.Response(200, request=httpx.Request("POST", url))
+
+    monkeypatch.setattr("app.services.notifier.httpx.post", send)
+    response = start(client)
+    assert response.status_code == 200
+    assert response.json()["codigo_demo"] is None
+    assert response.json()["canal"] == ("log" if telegram_fails else "telegram")
+    assert len(deliveries) == 1
+    code = deliveries[0]["text"].split(" es ")[1].split(".")[0]
+    assert (
+        client.post(
+            "/api/access/verify",
+            json={
+                "challenge_id": response.json()["challenge_id"],
+                "codigo": code,
+            },
+        ).status_code
+        == 200
+    )
+
+
+def test_log_notifier_exposes_demo_code(access_client, monkeypatch):
+    from app.config import settings
+    from app.services.notifier import LogNotifier
+
+    client, _ = access_client
+    monkeypatch.setattr(settings, "telegram_bot_token", "")
+    response = start(client)
+    assert response.status_code == 200
+    assert response.json()["canal"] == "log"
+    assert len(response.json()["codigo_demo"]) == 6
+    assert response.json()["codigo_demo"] in LogNotifier.feed()[0].mensaje
+
+
+def test_patient_pdf_is_scoped_to_notified_results_and_session(access_client):
+    client, clock = access_client
+    with store.session() as s:
+        other = s.exec(select(Patient).where(Patient.id != MARIA["id"])).first()
+        for rid, patient_id, state in [
+            ("own-pdf", MARIA["id"], "notificado"),
+            ("other-pdf", other.id, "notificado"),
+            ("draft-pdf", MARIA["id"], "autorizado"),
+        ]:
+            s.add(
+                Result(
+                    id=rid,
+                    patient_id=patient_id,
+                    estado=state,
+                    pdf_path="demo.pdf",
+                    explicacion_clara="Tu resultado salió normal, regresa en 1 año.",
+                )
+            )
+        s.commit()
+    client.headers.pop("X-Demo-Role")
+    headers = {"Authorization": f"Bearer {login(client).json()['session_token']}"}
+    url = "/api/access/me/results/own-pdf/pdf"
+    response = client.get(url, headers=headers)
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "application/pdf"
+    assert response.headers["cache-control"] == "no-store"
+    assert response.content.startswith(b"%PDF")
+    text = "".join(
+        page.extract_text() for page in PdfReader(BytesIO(response.content)).pages
+    )
+    assert "Tu resultado salió normal" in text
+    for rid in ["other-pdf", "draft-pdf", "missing"]:
+        assert (
+            client.get(f"/api/access/me/results/{rid}/pdf", headers=headers).status_code
+            == 404
+        )
+    assert client.get(url).status_code == 401
+    assert (
+        client.get(url, headers={"Authorization": "Bearer invalid"}).status_code == 401
+    )
+    clock[0] += 900
+    assert client.get(url, headers=headers).status_code == 401
+
+
+def test_patient_pdf_rechecks_revoked_credential(access_client):
+    client, _ = access_client
+    headers = {"Authorization": f"Bearer {login(client).json()['session_token']}"}
+    with store.session() as s:
+        patient = s.get(Patient, MARIA["id"])
+        patient.qr_revocado = True
+        s.add(patient)
+        s.commit()
+    assert (
+        client.get("/api/access/me/results/any/pdf", headers=headers).status_code == 410
+    )

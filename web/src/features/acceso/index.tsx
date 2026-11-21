@@ -26,6 +26,8 @@ function AccesoFlow({ token }: { token: string }) {
   const [scanning, setScanning] = useState(false);
   const [canSpeak] = useState(() => "speechSynthesis" in window);
   const requestVersion = useRef(0);
+  const sessionToken = useRef<string | null>(null);
+  const pdfUrls = useRef<string[]>([]);
 
   useEffect(() => {
     let active = true;
@@ -34,7 +36,7 @@ function AccesoFlow({ token }: { token: string }) {
     api<AccessIdentity>(`/access/token/${encodeURIComponent(token)}`)
       .then((value) => { if (active) setIdentity(value); })
       .catch((reason) => { if (active) setError(reason.message); });
-    return () => { active = false; requestVersion.current += 1; setAccessSession(null); window.speechSynthesis?.cancel(); };
+    return () => { active = false; requestVersion.current += 1; sessionToken.current = null; pdfUrls.current.forEach((url) => URL.revokeObjectURL(url)); pdfUrls.current = []; setAccessSession(null); window.speechSynthesis?.cancel(); };
   }, [token]);
 
   useEffect(() => {
@@ -84,8 +86,27 @@ function AccesoFlow({ token }: { token: string }) {
       const version = requestVersion.current;
       const session = await postJson<AccessVerifyResponse>("/access/verify", { challenge_id: challenge?.challenge_id, codigo: code });
       if (version !== requestVersion.current) return;
+      sessionToken.current = session.session_token;
       setAccessSession(session.session_token); setVerified(true);
       await loadResults();
+    });
+  }
+
+  function openPdf(result: PatientResultView) {
+    const tab = window.open("about:blank", "_blank");
+    if (tab) tab.opener = null;
+    void run(async () => {
+      try {
+        if (!tab) throw new Error("Permite abrir una pestaña para consultar tu PDF.");
+        const version = requestVersion.current;
+        const response = await fetch(result.pdf_url, { headers: { Authorization: `Bearer ${sessionToken.current}` } });
+        if (!response.ok) throw new Error("No pudimos abrir el PDF. Verifica tu sesión e intenta de nuevo.");
+        const blob = await response.blob();
+        if (version !== requestVersion.current) { tab.close(); return; }
+        const url = URL.createObjectURL(blob);
+        pdfUrls.current.push(url);
+        tab.location.replace(url);
+      } catch (reason) { tab?.close(); throw reason; }
     });
   }
 
@@ -128,7 +149,7 @@ function AccesoFlow({ token }: { token: string }) {
           <div className="access-actions">
             <Button size="lg" disabled={!canSpeak} onClick={() => { window.speechSynthesis.cancel(); const speech = new SpeechSynthesisUtterance(result.explicacion_clara || "Consulta tu resultado con EIRA."); speech.lang = "es-MX"; window.speechSynthesis.speak(speech); }}><SpeakerHigh size={24} aria-hidden="true" /> Escuchar resultado</Button>
             {!canSpeak && <p>Tu navegador no permite lectura en voz alta.</p>}
-            <a className="hr-btn hr-btn--secondary hr-btn--lg" href={result.pdf_url} target="_blank" rel="noreferrer"><FilePdf size={24} aria-hidden="true" /> Abrir PDF</a>
+            <Button variant="secondary" size="lg" disabled={busy} onClick={() => openPdf(result)}><FilePdf size={24} aria-hidden="true" /> Abrir PDF</Button>
           </div>
           <p>Este resultado fue autorizado por el equipo médico. Si tienes dudas, acércate a EIRA.</p>
         </section>)}

@@ -1,25 +1,20 @@
 from datetime import UTC, datetime
+from io import BytesIO
+from xml.sax.saxutils import escape
 
 from fastapi import HTTPException
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
 from sqlmodel import Session, select
 
 from app.config import settings
 from app.db import Patient, Result, Study, TrustedContact, now_iso
 from app.schemas import AccessStartRequest, PatientResultView
+from app.services.notifier import LogNotifier, get_notifier
 from app.services.otp import OTPStore
 from app.services.sync import record_audit
 
-try:
-    from app.services.notifier import LogNotifier
-except ModuleNotFoundError:
-
-    class LogNotifier:
-        def send_otp(self, telefono: str, codigo: str):
-            return {"canal": "SMS simulado", "codigo_demo": codigo}
-
-
 otp = OTPStore(valkey_url=settings.valkey_url)
-notifier = LogNotifier()
 
 
 def mask(phone: str) -> str:
@@ -71,12 +66,14 @@ def start(s: Session, request: AccessStartRequest):
         "parentesco": contact.parentesco if contact else None,
     }
     challenge, code = otp.challenge(payload)
+    notifier = get_notifier()
     delivery = notifier.send_otp(phone, code)
     return {
         "challenge_id": challenge,
         "destino_enmascarado": mask(phone),
         "expira_en_segundos": 300,
         **delivery,
+        "codigo_demo": code if isinstance(notifier, LogNotifier) else None,
     }
 
 
@@ -120,7 +117,7 @@ def results(s: Session, session_token: str):
                 clasificacion=result.clasificacion,
                 explicacion_clara=result.explicacion_clara,
                 proximo_control=result.proximo_control,
-                pdf_url=f"/api/results/{result.id}/pdf",
+                pdf_url=f"/api/access/me/results/{result.id}/pdf",
             )
         )
         result.visto_por = seen_by
@@ -135,3 +132,23 @@ def results(s: Session, session_token: str):
         )
     s.commit()
     return views
+
+
+def patient_pdf(s: Session, session_token: str, result_id: str) -> bytes:
+    patient = check_viewer(s, otp.get("session", session_token))
+    result = s.get(Result, result_id)
+    if not result or result.patient_id != patient.id or result.estado != "notificado":
+        raise HTTPException(404, "Resultado no disponible.")
+    styles = getSampleStyleSheet()
+    output = BytesIO()
+    content = [Paragraph("Hilo Rosa · Resumen de tu resultado", styles["Title"])]
+    for text in (
+        f"Paciente: {patient.nombre} {patient.apellidos}",
+        f"Estudio: {result.tipo_estudio}",
+        result.explicacion_clara or "Consulta tu resultado con el equipo de EIRA.",
+        f"Próximo control: {result.proximo_control or 'Consulta al equipo médico'}",
+        "Resumen para la paciente. No sustituye el informe del laboratorio.",
+    ):
+        content.extend([Spacer(1, 12), Paragraph(escape(text), styles["BodyText"])])
+    SimpleDocTemplate(output).build(content)
+    return output.getvalue()
