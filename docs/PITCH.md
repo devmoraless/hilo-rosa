@@ -1,7 +1,7 @@
 # Pitch · Hilo Rosa (2 minutos)
 
 **0:00 – 0:20 · El problema**
-EIRA ha realizado más de 86,000 estudios a mujeres de comunidades rurales de Jalisco (eiraac.org). Hoy entrega más de 300 resultados de Papanicolaou al mes por **una sola cuenta de WhatsApp**, asociándolos por nombre. Si esa cuenta se bloquea, las entregas se detienen. Y muchas pacientes ni siquiera tienen celular propio.
+EIRA ha realizado más de 86,000 estudios a mujeres de comunidades rurales de Jalisco (eiraac.org). Hoy entrega más de 300 resultados de Papanicolaou al mes por **una sola cuenta de WhatsApp**, asociándolos por nombre. Si esa cuenta se bloquea, las entregas se detienen. Y suponemos —falta validarlo con EIRA— que muchas pacientes comparten celular con su familia.
 
 **0:20 – 0:30 · La idea**
 Hilo Rosa une los dos retos con un objeto físico: **una credencial con folio y QR**. Sirve para reconocer a la paciente que regresa, y para que ella o un familiar de confianza abra su resultado, sin cuenta ni contraseña.

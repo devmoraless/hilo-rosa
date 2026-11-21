@@ -10,7 +10,7 @@ Prototipo para la Vibeathon Nerdearla México 2026 · **Reto 4** (entrega digita
 
 ## El problema
 
-EIRA entrega más de 300 resultados de Papanicolaou al mes por una sola cuenta de WhatsApp, asociándolos por nombre; si la cuenta se bloquea, las entregas se detienen (brief del reto, Devpost). Sus pacientes viven en comunidades rurales del sur de Jalisco, muchas sin celular propio, y regresan a varias jornadas.
+EIRA entrega más de 300 resultados de Papanicolaou al mes por una sola cuenta de WhatsApp, asociándolos por nombre; si la cuenta se bloquea, las entregas se detienen (brief del reto, Devpost). Sus pacientes viven en comunidades rurales y regresan a varias jornadas. Suponemos que muchas comparten celular con su familia (supuesto a validar con EIRA, ver `docs/PREGUNTAS_EIRA.md`).
 
 ## Qué hace Hilo Rosa
 
