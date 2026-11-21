@@ -49,3 +49,17 @@ def test_schemas_roundtrip_result_states() -> None:
     for estado in RESULT_STATES:
         out = ResultOut(id="r1", estado=estado, tipo_estudio="papanicolaou")
         assert ResultOut.model_validate_json(out.model_dump_json()) == out
+
+
+def test_qr_tokens_carry_no_personal_data() -> None:
+    import unicodedata
+
+    def plain(text: str) -> str:
+        return "".join(c for c in unicodedata.normalize("NFD", text) if unicodedata.category(c) != "Mn").lower()
+
+    with store.session() as s:
+        for p in s.exec(select(Patient)).all():
+            token = p.qr_token.lower()
+            assert len(token) >= 20
+            for piece in [*plain(p.nombre).split(), *plain(p.apellidos).split(), p.folio.split("-")[1].lower(), p.fecha_nacimiento[:4]]:
+                assert piece not in token, (p.id, piece)

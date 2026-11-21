@@ -45,7 +45,7 @@ MARIA = {
     "telefono": "+523411000001",  # Laura's phone (shared); fictitious
     "telefono_propio": False,
     "canal_aviso": "telegram",
-    "qr_token": "qrMariaDemo7K3PzX9vQ2",
+    "qr_token": "Xb7nQ2vRk9TzWm4pHs8dLc",
 }
 LAURA = {
     "id": "tc-laura",
