@@ -1,7 +1,7 @@
 # STATE
 
 Phase: execution
-Updated: 1795287835
+Updated: 1795287838
 AVAILABLE: HR-011 HR-012 
 CLAIMED: -
 BLOCKED: -
@@ -12,15 +12,15 @@ CANCELLED: -
 Claims (first 24; status --task ID shows detail):
 HR-008 | REVIEW | devin-1 | until 1795301449
 HR-009 | REVIEW | dm-4 | until 1795302069
-HR-010 | REVIEW | devin-2 | until 1795302235
+HR-010 | REVIEW | devin-2 | until 1795302238
 
 Blockers: BLOCKED tasks; use status --task ID --summary.
 Current decisions (last 5):
-- 1795287014 | HR-010 | Only task Paths changed, screenshots stored under acceso; no done or PR; reused existing SQLite audit helpers | Why: Avoid dependency copies and out-of-scop
 - 1795287239 | HR-010 | Direct app.services.audit.verify; static mobile action area prevents validation-error input occlusion; self-critique per lead request | Why: Use merged depe
 - 1795287313 | HR-010 | local LogNotifier fallback until HR-009 | Why: HR-009 not started
 - 1795287386 | HR-007 | year-of-birth field so the real match.ts score is 92% | Why: name only scores 100%
 - 1795287669 | HR-009 | list endpoint at /api/review/results to avoid clash with HR-008 | Why: file ownership
+- 1795287838 | HR-010 | Audit permits medica and capturista via reused jornada role helper; late verify guarded by request version; scanner stops after startup settles on selection
 
 Global next step: available P0; else review PRs, tests, demo, rehearsal.
 Why: bounded snapshot to resume without rereading history.

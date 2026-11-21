@@ -15,3 +15,4 @@ Why: a reversible option after 15 min keeps work moving.
 - 1795287313 | HR-010 | local LogNotifier fallback until HR-009 | Why: HR-009 not started
 - 1795287386 | HR-007 | year-of-birth field so the real match.ts score is 92% | Why: name only scores 100%
 - 1795287669 | HR-009 | list endpoint at /api/review/results to avoid clash with HR-008 | Why: file ownership
+- 1795287838 | HR-010 | Audit permits medica and capturista via reused jornada role helper; late verify guarded by request version; scanner stops after startup settles on selection/unmount | Why: Address reviewed data exposure, false view logs and camera lifetime within task Paths
