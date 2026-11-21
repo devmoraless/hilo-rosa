@@ -1,0 +1,8 @@
+# ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
+1795284530	next	-	0	-	3586	devin-1	other
+1795284547	review	HR-004	0	-	7774	devin-1	other
+1795284551	status	HR-004	0	-	945	devin-1	other
+1795284584	review	HR-004	0	-	3646	devin-1	other
+1795284590	next	-	0	-	955	devin-1	other
+1795284591	status	-	0	-	1057	devin-1	other
+1795285141	wait	HR-001	4	-	540708	devin-1	other
