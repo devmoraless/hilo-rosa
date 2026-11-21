@@ -8,3 +8,4 @@ Why: a reversible option after 15 min keeps work moving.
 - 1795284321 | HR-004 | pesos fijos nombre60/fecha25/municipio10/tel10 + penalizacion nombre de pila x0.6 | Why: explicable y deterministico; evita falsos positivos por apellidos compartidos
 - 1795284480 | HR-001 | layout app/ + web/; main.tsx carga App.tsx por glob | Why: no tocar archivos de HR-002
 - 1795286060 | HR-002 | Direction 2 credencial, light EIRA blush bg (human pick) | Why: human picked v2 by looking, rejected dark bg
+- 1795286093 | deadline decision/HR-002-1795285107/1795286007 | BLOCKED_OTHER_TASK | Option: Direction 2 (credencial), fondo claro rosa EIRA en vez de oscuro; Why: elección del humano viendo las capturas: le gustó la animación de la credencial, no el fondo negro; no money, accounts, publishing or scope expansion.
