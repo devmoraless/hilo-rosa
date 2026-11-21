@@ -20,3 +20,4 @@ Why: a reversible option after 15 min keeps work moving.
 - 1795288678 | allow | devmoraless | test change: HR-010 | Why: pdf_url assertion → /api/access/me/results/{id}/pdf
 - 1795290917 | HR-014 | follow-up of HR-003 by dm-5: IMPLEMENTADO_VS_SIMULADO refleja lo integrado | Why: same Paths, no scope change
 - 1795291178 | plan | devmoraless/devmoraless | tasks added: HR-015 | Why: backlog without PR (Plan-Channel: claims)
+- 1795291408 | HR-016 | follow-up of HR-012 by dm-1: Marcar celular compartido como supuesto a validar | Why: same Paths, no scope change

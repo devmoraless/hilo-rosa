@@ -39,3 +39,15 @@ Append-only; added to .uak/TASKS.md from main. Why: adding tasks never waits for
 - **Tests:** labels_viewed_action_with_viewer_and_relationship, shows_integrity_ok_seal_when_chain_is_valid, shows_tampered_entry_index_when_chain_is_broken
 - **Verify:** `node --test web/src/features/medica/bitacora.test.ts && npm --prefix web run build`
 - **Next step:** leer `app/routers/audit.py` y `AuditResponse` en `web/src/api/types.ts`; escribir `bitacoraLogic.ts` (funciones puras) y sus 3 pruebas.
+
+## HR-016 · Marcar celular compartido como supuesto a validar (follow-up of HR-012)
+
+- **Type:** follow-up
+- **Priority:** P1
+- **Depends on:** HR-012
+- **Follow-up of:** HR-012
+- **Paths:** README.md, docs/PITCH.md, docs/DEMO.md, docs/media/, app/tests/test_e2e_demo.py
+- **Freeze-Allowed:** no
+- **Acceptance:**
+  - Marcar celular compartido como supuesto a validar
+- **Verify:** `uv run pytest -q app/tests/test_e2e_demo.py && test -s README.md && test -s docs/PITCH.md`
