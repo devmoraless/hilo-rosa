@@ -1,0 +1,65 @@
+/* HR-009 · Médica. Uses the tokens from web/src/index.css only. */
+.md-summary { display: flex; flex-wrap: wrap; gap: var(--sp-6); }
+.md-muted { color: var(--text-2); font-size: var(--fs-1); }
+.md-error { color: var(--bad); font-weight: 600; margin-bottom: var(--sp-4); }
+
+.md-calls { display: grid; gap: var(--sp-3); align-content: start; }
+.md-call-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
+.md-call-list li { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-3); padding: var(--sp-2) 0; border-top: 1px solid var(--line); }
+.md-call-name { font-weight: 600; flex: 1 1 auto; }
+
+.md-col-empty { color: var(--text-2); font-size: var(--fs-1); padding: var(--sp-2); }
+.md-card {
+  display: grid; gap: var(--sp-2); justify-items: start; text-align: left; width: 100%;
+  background: var(--surface); border: 1px solid transparent; border-radius: var(--r-md); box-shadow: var(--shadow);
+  padding: var(--sp-4); font: inherit; color: inherit; cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.md-card:hover { border-color: var(--brand); }
+.md-card--active { border-color: var(--accent); }
+.md-card-name { font-weight: 600; font-size: var(--fs-3); line-height: 1.2; }
+.md-card-meta { color: var(--text-2); font-size: var(--fs-1); }
+
+.md-page > .hr-page:first-child { padding-bottom: var(--sp-5); }
+.md-page .hr-layout-dashboard { grid-auto-columns: minmax(0, 1fr); overflow-x: visible; }
+.md-page .hr-kanban { min-height: 240px; }
+.md-below.hr-page { padding-top: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--sp-5); align-items: start; }
+.md-feed ul { list-style: none; margin: var(--sp-3) 0 0; padding: 0; display: grid; gap: var(--sp-2); }
+.md-feed li { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-3); padding: var(--sp-3) 0; border-top: 1px solid var(--line); }
+.md-feed-to { font-weight: 600; }
+.md-feed-msg { color: var(--text-2); }
+
+.md-sheet-backdrop { position: fixed; inset: 0; background: rgba(58, 21, 48, 0.28); z-index: 40; display: flex; justify-content: flex-end; }
+.md-sheet {
+  width: min(var(--panel), 100%); height: 100%; overflow-y: auto; background: var(--surface);
+  padding: var(--sp-5); display: grid; gap: var(--sp-4); align-content: start; box-shadow: var(--shadow);
+}
+.md-sheet-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--sp-3); }
+.md-sheet-head h2 { font: 400 var(--fs-4)/1.05 var(--font-display); }
+.md-pdf {
+  display: grid; gap: var(--sp-1); padding: var(--sp-3) var(--sp-4); border: 1px solid var(--line); border-radius: var(--r-sm);
+  font-weight: 600; text-decoration: none;
+}
+.md-pdf:hover { border-color: var(--accent); }
+.md-form { display: grid; gap: var(--sp-4); }
+
+.md-plain { background: var(--bg); border-radius: var(--r-sm); padding: var(--sp-3) var(--sp-4); display: grid; gap: var(--sp-1); }
+.md-plain p { font-size: var(--fs-2); }
+.md-plain--alta { background: #fdecea; color: var(--bad); }
+.md-plain-label { font-size: var(--fs-1); font-weight: 600; color: var(--text-2); }
+.md-plain--alta .md-plain-label { color: var(--bad); }
+
+.md-sent, .md-call { display: grid; gap: var(--sp-1); padding: var(--sp-3) var(--sp-4); border-radius: var(--r-sm); border: 1px solid var(--ok); }
+.md-sent strong { color: var(--ok); }
+.md-call { border-color: var(--bad); }
+.md-call strong { color: var(--bad); }
+
+@media (max-width: 760px) {
+  .md-page .hr-layout-dashboard { grid-auto-flow: row; grid-auto-columns: auto; overflow-x: visible; }
+  .md-page .hr-kanban { min-height: 0; }
+  .md-summary { gap: var(--sp-5); }
+  .md-below.hr-page { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .md-card { transition: none; }
+}
