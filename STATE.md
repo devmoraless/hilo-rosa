@@ -1,8 +1,8 @@
 # STATE
 
 Phase: feature freeze; authorized fixes, rehearsal and submission only
-Updated: 1795305410
-AVAILABLE: HR-019 
+Updated: 1795305420
+AVAILABLE: HR-019 HR-020 
 CLAIMED: -
 BLOCKED: -
 REVIEW: -
@@ -13,11 +13,11 @@ Claims (first 24; status --task ID shows detail):
 
 Blockers: BLOCKED tasks; use status --task ID --summary.
 Current decisions (last 5):
-- 1795294291 | HR-017 | follow-up of HR-012 by dm-1: DEMO.md y README apuntan a la pantalla de bitácora | Why: same Paths, no scope change
 - 1795294395 | HR-018 | follow-up of HR-014 by dm-5: Fila de bitácora: ya tiene pantalla | Why: same Paths, no scope change
 - 1795305379 | deadline freeze/event/1795295700 | FREEZE_DEMO_FIXES_ONLY | New claims only with Freeze-Allowed: yes; respect authorization.
 - 1795305400 | HR-019 | follow-up of HR-001 by dm-6: Fecha de nacimiento de María 2026-06-02 y script keepalive de Render | Why: same Paths, no scope change
 - 1795305410 | HR-020 | follow-up of HR-012 by dm-6: Demo: fecha de nacimiento de María 2026-06-02 en e2e y DEMO.md | Why: same Paths, no scope change
+- 1795305420 | HR-021 | follow-up of HR-008 by dm-6: test_results usa la nueva fecha de nacimiento de María | Why: same Paths, no scope change
 
 Global next step: available P0; else review PRs, tests, demo, rehearsal.
 Why: bounded snapshot to resume without rereading history.

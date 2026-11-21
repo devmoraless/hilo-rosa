@@ -99,3 +99,15 @@ Append-only; added to .uak/TASKS.md from main. Why: adding tasks never waits for
 - **Acceptance:**
   - Demo: fecha de nacimiento de María 2026-06-02 en e2e y DEMO.md
 - **Verify:** `uv run pytest -q app/tests/test_e2e_demo.py && test -s README.md && test -s docs/PITCH.md`
+
+## HR-021 · test_results usa la nueva fecha de nacimiento de María (follow-up of HR-008)
+
+- **Type:** follow-up
+- **Priority:** P1
+- **Depends on:** HR-008
+- **Follow-up of:** HR-008
+- **Paths:** app/routers/results.py, app/services/results.py, app/tests/test_results.py, web/src/features/laboratorio/
+- **Freeze-Allowed:** no
+- **Acceptance:**
+  - test_results usa la nueva fecha de nacimiento de María
+- **Verify:** `uv run pytest -q app/tests/test_results.py && npm --prefix web run build`

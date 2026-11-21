@@ -27,3 +27,4 @@ Why: a reversible option after 15 min keeps work moving.
 - 1795305379 | deadline freeze/event/1795295700 | FREEZE_DEMO_FIXES_ONLY | New claims only with Freeze-Allowed: yes; respect authorization.
 - 1795305400 | HR-019 | follow-up of HR-001 by dm-6: Fecha de nacimiento de María 2026-06-02 y script keepalive de Render | Why: same Paths, no scope change
 - 1795305410 | HR-020 | follow-up of HR-012 by dm-6: Demo: fecha de nacimiento de María 2026-06-02 en e2e y DEMO.md | Why: same Paths, no scope change
+- 1795305420 | HR-021 | follow-up of HR-008 by dm-6: test_results usa la nueva fecha de nacimiento de María | Why: same Paths, no scope change
