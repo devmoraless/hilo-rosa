@@ -13,3 +13,4 @@ Why: a reversible option after 15 min keeps work moving.
 - 1795287014 | HR-010 | Only task Paths changed, screenshots stored under acceso; no done or PR; reused existing SQLite audit helpers | Why: Avoid dependency copies and out-of-scope edits
 - 1795287239 | HR-010 | Direct app.services.audit.verify; static mobile action area prevents validation-error input occlusion; self-critique per lead request | Why: Use merged dependency and preserve editable birthdate on narrow screens
 - 1795287313 | HR-010 | local LogNotifier fallback until HR-009 | Why: HR-009 not started
+- 1795287386 | HR-007 | year-of-birth field so the real match.ts score is 92% | Why: name only scores 100%
