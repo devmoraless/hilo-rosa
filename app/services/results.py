@@ -13,6 +13,7 @@ from datetime import date
 
 from pypdf import PdfReader
 from pypdf.errors import PdfReadError
+from sqlalchemy import update
 from sqlmodel import Session, select
 
 from app.config import settings
@@ -22,6 +23,8 @@ from app.services.sync import record_audit
 
 FOLIO_RE = re.compile(r"\bEIRA-[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{4}\b")
 MAX_PDF_BYTES = 10 * 1024 * 1024
+MAX_BATCH_BYTES = 50 * 1024 * 1024
+MAX_BATCH_FILES = 50
 STUDY_WORDS = (("papanicolaou", "papanicolaou"), ("mastograf", "mastografia"), ("ultrasonido", "ultrasonido"))
 
 
@@ -37,10 +40,11 @@ def _plain(text: str) -> str:
 
 
 def _pdf_text(data: bytes) -> str:
+    """Raises ResultError(422) when the bytes are not a readable PDF (e.g. truncated)."""
     try:
-        return "\n".join(page.extract_text() or "" for page in PdfReader(io.BytesIO(data)).pages)
-    except (PdfReadError, ValueError, OSError):
-        return ""
+        return "\n".join(page.extract_text() or "" for page in PdfReader(io.BytesIO(data), strict=True).pages)
+    except (PdfReadError, ValueError, OSError, KeyError, TypeError) as e:
+        raise ResultError(422, "el PDF está dañado o incompleto") from e
 
 
 def _line(text: str, label: str) -> str:
@@ -111,16 +115,20 @@ def to_out(s: Session, r: Result, role: str) -> ResultOut:
 def upload(s: Session, files: list[tuple[str, bytes]], role: str) -> list[ResultOut]:
     if not files:
         raise ResultError(422, "sube al menos un PDF")
+    texts: list[str] = []
     for name, data in files:
         if not data.startswith(b"%PDF"):
             raise ResultError(422, f"{name} no es un PDF")
         if len(data) > MAX_PDF_BYTES:
             raise ResultError(413, f"{name} pesa más de 10 MB")
+        try:
+            texts.append(_pdf_text(data))
+        except ResultError as e:
+            raise ResultError(422, f"{name}: {e.detail}") from e
     folder = settings.hilo_data_dir / "results"
     folder.mkdir(parents=True, exist_ok=True)
     rows: list[Result] = []
-    for name, data in files:
-        text = _pdf_text(data)
+    for (name, data), text in zip(files, texts, strict=True):
         rid = new_id()
         path = folder / f"{rid}.pdf"
         path.write_bytes(data)
@@ -152,11 +160,26 @@ def associate(s: Session, result_id: str, patient_ref: str, role: str) -> Result
     patient = s.get(Patient, ref) or s.exec(select(Patient).where(Patient.folio == ref.upper())).first()
     if patient is None:
         raise ResultError(404, "no hay una paciente con ese folio")
-    _link(s, result, patient, _fecha_toma(_pdf_text(_read(result))))
-    s.add(result)
+    study = _study_for(s, patient, result.tipo_estudio, _fecha_toma(_text_or_empty(_read(result))))
+    claimed = s.exec(  # type: ignore[call-overload]
+        update(Result)
+        .where(Result.id == result.id, Result.estado == "pendiente_asociar")  # type: ignore[arg-type]
+        .values(patient_id=patient.id, study_id=study.id, sugerencia_patient_id=None, estado="por_revisar")
+    )
+    if claimed.rowcount != 1:
+        s.rollback()
+        raise ResultError(409, "este resultado ya está asociado")
     record_audit(s, role, role, "result.associate", result.id)
     s.commit()
+    s.refresh(result)
     return to_out(s, result, role)
+
+
+def _text_or_empty(data: bytes) -> str:
+    try:
+        return _pdf_text(data)
+    except ResultError:
+        return ""
 
 
 def _read(result: Result) -> bytes:

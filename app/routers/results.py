@@ -1,4 +1,5 @@
 from typing import Annotated
+from urllib.parse import quote
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Response, UploadFile
 from sqlmodel import Session
@@ -31,7 +32,18 @@ def _call(fn, *args):
 
 @router.post("/upload", response_model=UploadResponse)
 async def upload(files: list[UploadFile], s: SessionDep, role: RoleDep) -> UploadResponse:
-    payload = [(f.filename or "resultado.pdf", await f.read()) for f in files]
+    if len(files) > service.MAX_BATCH_FILES:
+        raise HTTPException(413, f"sube como máximo {service.MAX_BATCH_FILES} PDFs por vez")
+    payload: list[tuple[str, bytes]] = []
+    total = 0
+    for f in files:
+        data = await f.read(service.MAX_PDF_BYTES + 1)
+        total += len(data)
+        if len(data) > service.MAX_PDF_BYTES:
+            raise HTTPException(413, f"{f.filename} pesa más de 10 MB")
+        if total > service.MAX_BATCH_BYTES:
+            raise HTTPException(413, "el lote pesa más de 50 MB")
+        payload.append((f.filename or "resultado.pdf", data))
     return UploadResponse(results=_call(service.upload, s, payload, role))
 
 
@@ -48,4 +60,6 @@ def associate(result_id: str, req: AssociateRequest, s: SessionDep, role: RoleDe
 @router.get("/{result_id}/pdf")
 def pdf(result_id: str, s: SessionDep, _: RoleDep) -> Response:
     name, data = _call(service.pdf_bytes, s, result_id)
-    return Response(data, media_type="application/pdf", headers={"Content-Disposition": f'inline; filename="{name}"'})
+    fallback = "".join(c if c.isascii() and c.isprintable() and c not in '"\\' else "_" for c in name)
+    disposition = f"inline; filename=\"{fallback}\"; filename*=UTF-8''{quote(name)}"
+    return Response(data, media_type="application/pdf", headers={"Content-Disposition": disposition})

@@ -89,3 +89,31 @@ def test_lab_role_cannot_see_patient_record():
         assert client.get("/api/results").status_code == 403
     not_pdf = lab.post("/api/results/upload", files=[("files", ("nota.txt", b"hola", "text/plain"))])
     assert not_pdf.status_code == 422
+
+
+def test_truncated_pdf_is_rejected_and_unicode_name_downloads():
+    data = (PDFS / CON_FOLIO).read_bytes()
+    bad = lab.post("/api/results/upload", files=[("files", ("roto.pdf", data[: len(data) // 3], "application/pdf"))])
+    assert bad.status_code == 422
+    ok = lab.post("/api/results/upload", files=[("files", ("resultado – María.pdf", data, "application/pdf"))])
+    assert ok.status_code == 200
+    pdf = medica.get(f"/api/results/{ok.json()['results'][0]['id']}/pdf")
+    assert pdf.status_code == 200
+    assert "filename*=UTF-8''resultado%20%E2%80%93%20Mar%C3%ADa.pdf" in pdf.headers["content-disposition"]
+
+
+def test_concurrent_association_does_not_overwrite_the_first():
+    from app.services import results as service
+
+    rid = _upload(lab, SIN_FOLIO).json()["results"][0]["id"]
+    with session() as stale:
+        assert stale.get(Result, rid).estado == "pendiente_asociar"
+        first = lab.post(f"/api/results/{rid}/associate", json={"patient_id": "pat-001"})
+        assert first.status_code == 200
+        try:
+            service.associate(stale, rid, "pat-021", "laboratorio")
+            raise AssertionError("second association should conflict")
+        except service.ResultError as e:
+            assert e.status == 409
+    with session() as s:
+        assert s.get(Result, rid).patient_id == "pat-001"
