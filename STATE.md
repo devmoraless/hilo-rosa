@@ -1,17 +1,17 @@
 # STATE
 
 Phase: execution
-Updated: 1795290718
+Updated: 1795290860
 AVAILABLE: -
-CLAIMED: HR-011 HR-012 
+CLAIMED: HR-011 
 BLOCKED: -
-REVIEW: -
+REVIEW: HR-012 
 INTEGRATED: HR-001 HR-002 HR-003 HR-004 HR-005 HR-006 HR-007 HR-008 HR-009 HR-010 HR-013 
 CANCELLED: -
 
 Claims (first 24; status --task ID shows detail):
 HR-011 | CLAIMED | dm-2 | until 1795293397
-HR-012 | CLAIMED | dm-1 | until 1795293418
+HR-012 | REVIEW | dm-1 | until 1795305260
 
 Blockers: BLOCKED tasks; use status --task ID --summary.
 Current decisions (last 5):
