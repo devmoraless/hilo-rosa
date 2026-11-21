@@ -4,7 +4,7 @@
 
 /* Hero: headline left, the turning credential right (the wow). */
 .lp-hero {
-  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center; gap: var(--sp-7);
+  display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.1fr); align-items: center; gap: var(--sp-6);
   min-height: calc(100vh - 75px); max-width: 1320px; margin: 0 auto; padding: var(--sp-6) clamp(16px, 4vw, 48px);
 }
 .lp-hero h1 { font-size: var(--fs-6); line-height: 0.95; color: var(--text); max-width: 9.5em; }
@@ -13,7 +13,7 @@
 .lp-actions .hr-btn { text-decoration: none; }
 .lp-hero .hr-btn--quiet { text-decoration: underline; text-underline-offset: 4px; }
 .lp-stage { display: grid; justify-items: center; gap: var(--sp-4); }
-.lp-stage .hr-cred-stage { width: min(500px, 100%); }
+.lp-stage .hr-cred-stage { width: min(600px, 100%); }
 .lp-stage-note { font-size: var(--fs-1); color: var(--text-2); text-align: center; }
 
 /* The pain, one number. */
