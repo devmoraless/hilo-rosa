@@ -21,7 +21,7 @@ Un **objeto físico** une los dos retos: la **credencial con folio y QR**.
 3. **Laboratorio** arrastra los PDFs: se asocian solos por folio; los que no, caen en una bandeja "sin asociar". El laboratorio solo ve folio y estado.
 4. **Médica** captura Bethesda/BIRADS + conducta con la numeración del formato en papel, ve el texto claro generado por reglas y **autoriza con su cédula**. El aviso a la paciente **nunca dice el diagnóstico**; un resultado anormal crea la tarea "llamar" en lugar de un mensaje.
 5. **La paciente o su familiar** escanea la credencial → fecha de nacimiento → código de 6 dígitos (5 min, 5 intentos) → sesión de 15 min → "Tu resultado salió normal, regresa en 1 año" + 🔊 + PDF.
-6. **Bitácora** con cadena de hashes SHA-256 (`GET /api/audit`, rol médica): registra "visto por Laura (hija)" y verifica la integridad de toda la cadena (`integridad_ok`). Hoy se consulta por API; la pantalla de bitácora es el siguiente paso.
+6. **Bitácora** con cadena de hashes SHA-256: en `/medica`, la sección Bitácora muestra cada acción en lenguaje claro ("Laura (hija) vio el resultado", "Dra. … autorizó el resultado", "Aviso enviado sin diagnóstico"), el hash de cada registro encadenado al anterior y el sello **"Integridad ✅"**; si alguien altera un registro, muestra "⚠ Registro alterado en la entrada N". También por API: `GET /api/audit` (rol médica).
 
 ## Cómo correrlo
 

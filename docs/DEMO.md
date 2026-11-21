@@ -11,7 +11,7 @@ Ten a mano: la laptop (capturista, laboratorio, médica) y el celular de "Laura"
 | 3 | `/laboratorio` | Arrastra `resultado_EIRA-7K3P.pdf` y `resultado_sin_folio.pdf` (en `app/fixtures/pdfs/`). | Uno ✅ asociado por folio; el otro en "sin asociar" con sugerencia. |
 | 4 | `/medica` | Abre la tarjeta de María: Bethesda **NILM**, conducta **rutina 1 año**, nombre + cédula → **Autorizar**. | Pasa a "Notificado"; aviso **sin diagnóstico**. Llega el Telegram al celular. |
 | 5 | celular | Escanea la credencial (o abre `/p/<token>`) → "Soy Laura (hija)" → fecha de nacimiento 12/05/1974 → código de 6 dígitos (Telegram). | Pide verificación; nadie sin la fecha y el código entra. |
-| 6 | celular + laptop | Entra. En la laptop abre `https://hilo-rosa.onrender.com/api/audit` (pide header `X-Demo-Role: medica`; en la demo muéstralo con la pestaña de red o con `curl -H "X-Demo-Role: medica" .../api/audit`). | "Tu resultado salió normal… regresa en un año" + 🔊 + PDF · en la bitácora: acción de "visto" y `integridad_ok: true`. |
+| 6 | celular + laptop | Laura entra. En la laptop vuelve a `/medica`, baja a **Bitácora** y presiona **Actualizar**. | Celular: "Tu resultado salió normal… regresa en un año" + 🔊 + PDF · laptop: sello verde **"Integridad ✅ · la cadena de hashes no fue alterada"** y arriba la fila **"Laura (hija) vio el resultado"**, cada fila con su hash y el hash previo. |
 
 ## Plan B
 - **Sin Telegram o sin red:** sin `TELEGRAM_*` el aviso y el código salen en pantalla como "SMS simulado".
