@@ -1,5 +1,5 @@
-import { useState, type ReactNode } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useState, type ReactNode } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import type { Role } from "../../api/types";
 import { getDemoRole, setDemoRole } from "../api";
 import { ConnectionBadge } from "./ConnectionBadge";
@@ -18,10 +18,22 @@ const VIEWS = [
   { to: "/p/demo", label: "Paciente" },
 ];
 
+export function roleForPath(pathname: string): Role | null {
+  if (pathname.startsWith("/p/")) return "paciente";
+  return ROLES.find((r) => r.path !== "/p/demo" && pathname.startsWith(r.path))?.role ?? null;
+}
+
 /** Demo login: the selected role travels in X-Demo-Role on every API call (lib/api.ts). */
 export function NavBar() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [role, setRole] = useState<Role>(getDemoRole());
+  // The route decides the demo role, so the selector never says "Capturista" on /medica.
+  useEffect(() => {
+    const match = roleForPath(pathname);
+    if (match && match !== getDemoRole()) setDemoRole(match);
+    if (match) setRole(match);
+  }, [pathname]);
   return (
     <nav className="hr-nav" aria-label="Principal">
       <NavLink to="/" className="hr-brand" aria-label="Hilo Rosa, inicio">
