@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import type { AuthorizeRequest, AuthorizeResponse, Bethesda, NotificationOut, ResultOut, ResultState } from "../../api/types";
 import { ApiError, api, postJson, setDemoRole } from "../../lib/api";
 import { Button, Card, Chip, Field, KanbanColumn, PageHeader, PageLayout, SectionHeader, Stat } from "../../lib/ui";
+import Bitacora from "./Bitacora";
 import "./medica.css";
 
 interface Task {
@@ -161,6 +162,10 @@ export default function Medica() {
           )}
         </div>
       )}
+
+      <div className="hr-page" style={{ paddingTop: 0 }}>
+        <Bitacora />
+      </div>
 
       {selected && (
         <CapturePanel
