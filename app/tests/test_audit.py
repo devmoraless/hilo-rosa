@@ -4,7 +4,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from app.services.audit import GENESIS_HASH, AuditLog, verify  # noqa: E402
+from app.services.audit import GENESIS_HASH, AuditLog, verify
 
 
 def test_audit_chain_detects_tampered_entry():

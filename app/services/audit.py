@@ -8,8 +8,8 @@ from __future__ import annotations
 
 import hashlib
 import json
-from datetime import datetime, timezone
-from typing import Iterable
+from collections.abc import Iterable
+from datetime import UTC, datetime
 
 GENESIS_HASH = "0" * 64
 CAMPOS = ("actor", "rol", "accion", "entidad_id", "ts")
@@ -49,7 +49,7 @@ class AuditLog:
             "rol": rol,
             "accion": accion,
             "entidad_id": str(entidad_id),
-            "ts": ts or datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "ts": ts or datetime.now(UTC).isoformat(timespec="seconds"),
             "prev_hash": self.last_hash,
         }
         entry["hash"] = compute_hash(entry["prev_hash"], entry)
