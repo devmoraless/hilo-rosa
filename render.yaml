@@ -1,0 +1,19 @@
+# Built by uak deploy · Render Blueprint: dashboard → New → Blueprint → this repo; fill the sync: false values.
+services:
+  - type: web
+    name: hilo-rosa
+    runtime: docker
+    plan: free   # no spend without the human; free sleeps after 15 min idle: open the URL ~1 min before the demo
+    healthCheckPath: /api/health
+    autoDeploy: true   # every push to main redeploys
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_DEMO_CHAT_ID
+        sync: false
+      - key: VALKEY_URL
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: HILO_PUBLIC_URL
+        sync: false
