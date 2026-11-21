@@ -1,0 +1,16 @@
+.access-flow { display: grid; gap: var(--sp-5); font-size: 18px; }
+.access-flow h2 { margin: 0 0 var(--sp-4); }
+.access-flow p { margin: 0 0 var(--sp-4); }
+.access-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-5); }
+.access-actions .hr-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2); }
+.access-sticky { position: sticky; bottom: 0; padding-block: var(--sp-3); background: var(--surface); }
+.access-demo { color: var(--text-2); font-size: 16px; }
+.access-error { border: 1px solid var(--bad); padding: var(--sp-4); border-radius: 14px; background: var(--surface); }
+.access-result { padding-block: var(--sp-5); }
+.access-result h2 { font: 400 clamp(40px, 6vw, 72px)/1.05 var(--font-display); max-width: 650px; }
+.access-explanation { font-size: 28px; line-height: 1.4; }
+#access-qr { width: 100%; overflow: hidden; }
+@media (max-width: 600px) {
+  .access-explanation { font-size: 20px; }
+  .access-actions .hr-btn { width: 100%; }
+}
