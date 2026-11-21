@@ -1,11 +1,11 @@
 # dm-4
 Agent: dm-4
 Started: 1795283875
-Events: 2
-Events-Since-Checkpoint: 2
-Checkpoints: 0
+Events: 3
+Events-Since-Checkpoint: 0
+Checkpoints: 1
 Sessions: 1
-Last-Checkpoint: 0
+Last-Checkpoint: 1795284321
 Human: devmoraless
 Last-Session: dm-4-1795283832
-Updated: 1795284295
+Updated: 1795284321
