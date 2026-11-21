@@ -117,3 +117,17 @@ def test_concurrent_association_does_not_overwrite_the_first():
             assert e.status == 409
     with session() as s:
         assert s.get(Result, rid).patient_id == "pat-001"
+
+
+def test_lab_never_sees_the_diagnosis_after_authorization():
+    rid = _upload(lab, CON_FOLIO).json()["results"][0]["id"]
+    with session() as s:
+        r = s.get(Result, rid)
+        r.estado, r.bethesda, r.conducta, r.clasificacion, r.prioridad = "autorizado", "HSIL", "colposcopia", "seguimiento", "alta"
+        r.explicacion_clara, r.autorizado_por_nombre, r.visto_por = "texto", "Dra. Demo", "paciente"
+        s.add(r)
+        s.commit()
+    row = next(x for x in lab.get("/api/results").json() if x["id"] == rid)
+    assert {k for k, v in row.items() if v is not None} <= {"id", "estado", "tipo_estudio", "pdf_nombre", "folio_detectado"}
+    assert row["folio_detectado"] == "EIRA-7K3P" and row["estado"] == "autorizado"
+    assert next(x for x in medica.get("/api/results").json() if x["id"] == rid)["bethesda"] == "HSIL"

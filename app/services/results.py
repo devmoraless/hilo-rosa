@@ -25,6 +25,7 @@ FOLIO_RE = re.compile(r"\bEIRA-[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{4}\b")
 MAX_PDF_BYTES = 10 * 1024 * 1024
 MAX_BATCH_BYTES = 50 * 1024 * 1024
 MAX_BATCH_FILES = 50
+LAB_FIELDS = {"id", "estado", "tipo_estudio", "pdf_nombre", "folio_detectado"}
 STUDY_WORDS = (("papanicolaou", "papanicolaou"), ("mastograf", "mastografia"), ("ultrasonido", "ultrasonido"))
 
 
@@ -104,8 +105,7 @@ def to_out(s: Session, r: Result, role: str) -> ResultOut:
     out = ResultOut.model_validate(r, from_attributes=True)
     out.folio_detectado = r.folio_detectado or (patient.folio if patient else None)
     if role == "laboratorio":
-        out.patient_id = out.paciente_nombre = out.sugerencia_patient_id = out.sugerencia_nombre = None
-        return out
+        return ResultOut(**out.model_dump(include=LAB_FIELDS))
     out.paciente_nombre = f"{patient.nombre} {patient.apellidos}" if patient else None
     suggestion = s.get(Patient, r.sugerencia_patient_id) if r.sugerencia_patient_id else None
     out.sugerencia_nombre = f"{suggestion.nombre} {suggestion.apellidos} · {suggestion.folio}" if suggestion else None
