@@ -68,6 +68,9 @@ def start(s: Session, request: AccessStartRequest):
     challenge, code = otp.challenge(payload)
     notifier = get_notifier()
     delivery = notifier.send_otp(phone, code)
+    if not isinstance(notifier, LogNotifier) and delivery["canal"] == "log":
+        otp.delete("otp", challenge)
+        raise HTTPException(503, "No pudimos enviar el código, intenta de nuevo.")
     return {
         "challenge_id": challenge,
         "destino_enmascarado": mask(phone),

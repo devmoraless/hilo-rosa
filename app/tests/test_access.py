@@ -246,6 +246,12 @@ def test_configured_telegram_never_exposes_demo_code(
 
     monkeypatch.setattr("app.services.notifier.httpx.post", send)
     response = start(client)
+    if telegram_fails:
+        assert response.status_code == 503
+        assert response.json() == {
+            "detail": "No pudimos enviar el código, intenta de nuevo."
+        }
+        return
     assert response.status_code == 200
     assert response.json()["codigo_demo"] is None
     assert response.json()["canal"] == ("log" if telegram_fails else "telegram")
@@ -330,4 +336,42 @@ def test_patient_pdf_rechecks_revoked_credential(access_client):
         s.commit()
     assert (
         client.get("/api/access/me/results/any/pdf", headers=headers).status_code == 410
+    )
+
+
+def test_failed_telegram_delivery_invalidates_challenge(access_client, monkeypatch):
+    from app.config import settings
+    from app.services import access
+
+    client, _ = access_client
+    monkeypatch.setattr(settings, "telegram_bot_token", "test-token")
+    monkeypatch.setattr(settings, "telegram_demo_chat_id", "test-chat")
+    challenges = []
+    original = access.otp.challenge
+
+    def challenge(payload):
+        issued = original(payload)
+        challenges.append(issued)
+        return issued
+
+    def unavailable(*args, **kwargs):
+        raise httpx.ConnectError("offline")
+
+    monkeypatch.setattr(access.otp, "challenge", challenge)
+    monkeypatch.setattr("app.services.notifier.httpx.post", unavailable)
+    response = start(client)
+    assert response.status_code == 503
+    assert "No pudimos enviar el código" in response.json()["detail"]
+    assert "challenge_id" not in response.json()
+    assert "codigo_demo" not in response.json()
+    token, code = challenges[0]
+    assert (
+        client.post(
+            "/api/access/verify",
+            json={
+                "challenge_id": token,
+                "codigo": code,
+            },
+        ).status_code
+        == 410
     )

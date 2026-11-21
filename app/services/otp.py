@@ -44,6 +44,13 @@ class OTPStore:
             )
         return entry
 
+    def delete(self, kind, token):
+        if self.redis:
+            self.redis.delete(f"access:{kind}:{token}")
+        else:
+            with self.lock:
+                self.entries.pop(f"{kind}:{token}", None)
+
     def challenge(self, payload):
         code = f"{secrets.randbelow(1000000):06d}"
         token, _ = self.put(
