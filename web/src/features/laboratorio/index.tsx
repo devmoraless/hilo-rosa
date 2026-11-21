@@ -3,6 +3,7 @@
 // types the folio from the sample's label (or, as médica, accepts the suggestion).
 import { CheckCircle, WarningCircle } from "@phosphor-icons/react";
 import { useCallback, useEffect, useRef, useState, type DragEvent, type FormEvent } from "react";
+import { useLocation } from "react-router-dom";
 import type { ResultOut, ResultState, UploadResponse } from "../../api/types";
 import { ApiError, api, getDemoRole, postJson } from "../../lib/api";
 import { Button, Card, Chip, Field, PageHeader, PageLayout, SectionHeader, Stat, type Tone } from "../../lib/ui";
@@ -74,6 +75,8 @@ export default function Laboratorio() {
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const input = useRef<HTMLInputElement>(null);
+  // The role selector re-navigates to this route on every change (new location key): reload as the new role.
+  const { key: visit } = useLocation();
 
   const load = useCallback(async () => {
     try {
@@ -88,7 +91,7 @@ export default function Laboratorio() {
 
   useEffect(() => {
     void load();
-  }, [load]);
+  }, [load, visit]);
 
   async function send(files: FileList | File[] | null) {
     const pdfs = Array.from(files ?? []);
