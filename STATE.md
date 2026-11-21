@@ -1,7 +1,7 @@
 # STATE
 
 Phase: feature freeze; authorized fixes, rehearsal and submission only
-Updated: 1795305379
+Updated: 1795305400
 AVAILABLE: -
 CLAIMED: -
 BLOCKED: -
@@ -13,11 +13,11 @@ Claims (first 24; status --task ID shows detail):
 
 Blockers: BLOCKED tasks; use status --task ID --summary.
 Current decisions (last 5):
-- 1795291408 | HR-016 | follow-up of HR-012 by dm-1: Marcar celular compartido como supuesto a validar | Why: same Paths, no scope change
 - 1795292303 | HR-015 | sección bajo el kanban; estilos inline en Bitacora.tsx (medica.css fuera de Paths) | Why: Paths
 - 1795294291 | HR-017 | follow-up of HR-012 by dm-1: DEMO.md y README apuntan a la pantalla de bitácora | Why: same Paths, no scope change
 - 1795294395 | HR-018 | follow-up of HR-014 by dm-5: Fila de bitácora: ya tiene pantalla | Why: same Paths, no scope change
 - 1795305379 | deadline freeze/event/1795295700 | FREEZE_DEMO_FIXES_ONLY | New claims only with Freeze-Allowed: yes; respect authorization.
+- 1795305400 | HR-019 | follow-up of HR-001 by dm-6: Fecha de nacimiento de María 2026-06-02 y script keepalive de Render | Why: same Paths, no scope change
 
 Global next step: available P0; else review PRs, tests, demo, rehearsal.
 Why: bounded snapshot to resume without rereading history.

@@ -75,3 +75,15 @@ Append-only; added to .uak/TASKS.md from main. Why: adding tasks never waits for
 - **Acceptance:**
   - Fila de bitácora: ya tiene pantalla
 - **Verify:** `for f in ARQUITECTURA IMPLEMENTADO_VS_SIMULADO SEGURIDAD RIESGOS_Y_PILOTO PREGUNTAS_EIRA; do test -s docs/$f.md || exit 1; done`
+
+## HR-019 · Fecha de nacimiento de María 2026-06-02 y script keepalive de Render (follow-up of HR-001)
+
+- **Type:** follow-up
+- **Priority:** P1
+- **Depends on:** HR-001
+- **Follow-up of:** HR-001
+- **Paths:** pyproject.toml, uv.lock, .python-version, app/__init__.py, app/main.py, app/config.py, app/db.py, app/schemas/, app/fixtures/, app/routers/__init__.py, app/routers/health.py, app/routers/demo.py, app/services/__init__.py, app/services/store.py, app/tests/__init__.py, app/tests/conftest.py, app/tests/test_health.py, app/tests/test_seed.py, web/package.json, web/package-lock.json, web/vite.config.ts, web/tsconfig.json, web/tsconfig.node.json, web/index.html, web/src/main.tsx, web/src/api/, web/src/lib/api.ts, scripts/, Dockerfile, render.yaml, .dockerignore, .env.example, LICENSE
+- **Freeze-Allowed:** no
+- **Acceptance:**
+  - Fecha de nacimiento de María 2026-06-02 y script keepalive de Render
+- **Verify:** `uv run pytest -q && npm --prefix web ci && npm --prefix web run build`

@@ -25,3 +25,4 @@ Why: a reversible option after 15 min keeps work moving.
 - 1795294291 | HR-017 | follow-up of HR-012 by dm-1: DEMO.md y README apuntan a la pantalla de bitácora | Why: same Paths, no scope change
 - 1795294395 | HR-018 | follow-up of HR-014 by dm-5: Fila de bitácora: ya tiene pantalla | Why: same Paths, no scope change
 - 1795305379 | deadline freeze/event/1795295700 | FREEZE_DEMO_FIXES_ONLY | New claims only with Freeze-Allowed: yes; respect authorization.
+- 1795305400 | HR-019 | follow-up of HR-001 by dm-6: Fecha de nacimiento de María 2026-06-02 y script keepalive de Render | Why: same Paths, no scope change
