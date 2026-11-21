@@ -1,11 +1,11 @@
 # dm-3
 Agent: dm-3
 Started: 1795283896
-Events: 2
-Events-Since-Checkpoint: 2
-Checkpoints: 0
+Events: 3
+Events-Since-Checkpoint: 0
+Checkpoints: 1
 Sessions: 1
-Last-Checkpoint: 0
+Last-Checkpoint: 1795284164
 Human: devmoraless
 Last-Session: dm-3-1795283831
-Updated: 1795284137
+Updated: 1795284164
