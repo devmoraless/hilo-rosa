@@ -366,7 +366,7 @@ function NewPatientForm({
         <Field label="Fecha de nacimiento" type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} required />
         <Field label="Teléfono" type="tel" inputMode="tel" value={telefono} onChange={(e) => setTelefono(e.target.value)} hint="Opcional." />
         <label className="flex items-center gap-3">
-          <input type="checkbox" className="h-6 w-6" checked={propio} onChange={(e) => setPropio(e.target.checked)} />
+          <input type="checkbox" className="h-6 w-6 accent-[var(--accent)]" checked={propio} onChange={(e) => setPropio(e.target.checked)} />
           El teléfono es suyo (no compartido)
         </label>
         <Field label="¿Cómo le avisamos que su resultado está listo?">
@@ -417,7 +417,7 @@ function ContactForm({ patientName, onSkip, onSubmit }: { patientName: string; o
         <label className="flex items-start gap-3">
           <input
             type="checkbox"
-            className="mt-1 h-6 w-6 shrink-0"
+            className="mt-1 h-6 w-6 shrink-0 accent-[var(--accent)]"
             checked={c.consentimiento}
             onChange={(e) => setC({ ...c, consentimiento: e.target.checked })}
           />
