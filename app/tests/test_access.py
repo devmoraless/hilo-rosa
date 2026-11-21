@@ -1,4 +1,5 @@
 from io import BytesIO
+from pathlib import Path
 
 import httpx
 import pytest
@@ -337,6 +338,56 @@ def test_patient_pdf_rechecks_revoked_credential(access_client):
     assert (
         client.get("/api/access/me/results/any/pdf", headers=headers).status_code == 410
     )
+
+
+def test_patient_pdf_serves_stored_lab_file(access_client, tmp_path):
+    client, _ = access_client
+    original = Path("app/fixtures/pdfs/resultado_EIRA-7K3P.pdf").read_bytes()
+    attachment = tmp_path / "lab.pdf"
+    attachment.write_bytes(original)
+    with store.session() as s:
+        s.add(
+            Result(
+                id="attached-pdf",
+                patient_id=MARIA["id"],
+                estado="notificado",
+                pdf_path=str(attachment),
+                explicacion_clara="Texto del resumen",
+            )
+        )
+        s.commit()
+    client.headers.pop("X-Demo-Role")
+    headers = {"Authorization": f"Bearer {login(client).json()['session_token']}"}
+    response = client.get("/api/access/me/results/attached-pdf/pdf", headers=headers)
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "application/pdf"
+    assert response.content == original
+    assert response.headers["cache-control"] == "no-store"
+
+
+def test_patient_pdf_read_error_does_not_silently_replace_attachment(
+    access_client, monkeypatch
+):
+    client, _ = access_client
+    with store.session() as s:
+        s.add(
+            Result(
+                id="unreadable-pdf",
+                patient_id=MARIA["id"],
+                estado="notificado",
+                pdf_path="unreadable.pdf",
+            )
+        )
+        s.commit()
+    headers = {"Authorization": f"Bearer {login(client).json()['session_token']}"}
+
+    def unreadable(path):
+        raise PermissionError("unreadable")
+
+    monkeypatch.setattr("app.services.access.Path.read_bytes", unreadable)
+    response = client.get("/api/access/me/results/unreadable-pdf/pdf", headers=headers)
+    assert response.status_code == 503
+    assert "No pudimos abrir el PDF" in response.json()["detail"]
 
 
 def test_failed_telegram_delivery_invalidates_challenge(access_client, monkeypatch):

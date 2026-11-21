@@ -1,5 +1,6 @@
 from datetime import UTC, datetime
 from io import BytesIO
+from pathlib import Path
 from xml.sax.saxutils import escape
 
 from fastapi import HTTPException
@@ -142,6 +143,15 @@ def patient_pdf(s: Session, session_token: str, result_id: str) -> bytes:
     result = s.get(Result, result_id)
     if not result or result.patient_id != patient.id or result.estado != "notificado":
         raise HTTPException(404, "Resultado no disponible.")
+    if result.pdf_path:
+        try:
+            data = Path(result.pdf_path).read_bytes()
+        except FileNotFoundError:
+            data = b""
+        except OSError as exc:
+            raise HTTPException(503, "No pudimos abrir el PDF, intenta de nuevo.") from exc
+        if data:
+            return data
     styles = getSampleStyleSheet()
     output = BytesIO()
     content = [Paragraph("Hilo Rosa · Resumen de tu resultado", styles["Title"])]
