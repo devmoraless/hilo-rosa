@@ -18,3 +18,4 @@ Why: a reversible option after 15 min keeps work moving.
 - 1795287838 | HR-010 | Audit permits medica and capturista via reused jornada role helper; late verify guarded by request version; scanner stops after startup settles on selection/unmount | Why: Address reviewed data exposure, false view logs and camera lifetime within task Paths
 - 1795287947 | HR-013 | follow-up of HR-002 by dm-1: NavBar refleja el rol de la ruta actual | Why: same Paths, no scope change
 - 1795288678 | allow | devmoraless | test change: HR-010 | Why: pdf_url assertion → /api/access/me/results/{id}/pdf
+- 1795290917 | HR-014 | follow-up of HR-003 by dm-5: IMPLEMENTADO_VS_SIMULADO refleja lo integrado | Why: same Paths, no scope change

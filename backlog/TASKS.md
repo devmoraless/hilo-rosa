@@ -13,3 +13,15 @@ Append-only; added to .uak/TASKS.md from main. Why: adding tasks never waits for
 - **Acceptance:**
   - NavBar refleja el rol de la ruta actual
 - **Verify:** `test -s web/DESIGN.md && ls web/public/design-lock/screens/*-1280.png && bash .uak/bin/uak lint`
+
+## HR-014 · IMPLEMENTADO_VS_SIMULADO refleja lo integrado (follow-up of HR-003)
+
+- **Type:** follow-up
+- **Priority:** P1
+- **Depends on:** HR-003
+- **Follow-up of:** HR-003
+- **Paths:** docs/ARQUITECTURA.md, docs/IMPLEMENTADO_VS_SIMULADO.md, docs/SEGURIDAD.md, docs/RIESGOS_Y_PILOTO.md, docs/PREGUNTAS_EIRA.md
+- **Freeze-Allowed:** no
+- **Acceptance:**
+  - IMPLEMENTADO_VS_SIMULADO refleja lo integrado
+- **Verify:** `for f in ARQUITECTURA IMPLEMENTADO_VS_SIMULADO SEGURIDAD RIESGOS_Y_PILOTO PREGUNTAS_EIRA; do test -s docs/$f.md || exit 1; done`
