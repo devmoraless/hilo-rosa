@@ -3,6 +3,7 @@
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
+# ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 1795284530	next	-	0	-	3586	devin-1	other
 1795284547	review	HR-004	0	-	7774	devin-1	other
 1795284551	status	HR-004	0	-	945	devin-1	other
@@ -81,3 +82,12 @@
 1795287023	status	HR-008	0	-	1247	devin-1	other
 1795287052	done	HR-008	0	-	7803	devin-1	other
 1795287339	wait	HR-008	4	-	540422	devin-1	other
+1795287292	done	HR-010	0	-	7349	devin-2	other
+1795287296	checkpoint	HR-010	2	no-identity	57	-	other
+1795287299	status	HR-010	0	-	2542	devin-2	other
+1795287315	checkpoint	HR-010	0	-	2437	devin-2	other
+1795287323	heartbeat	HR-010	0	-	2661	devin-2	other
+1795287499	heartbeat	HR-010	0	-	2413	devin-2	other
+1795287838	heartbeat	HR-010	0	-	2523	devin-2	other
+1795287840	checkpoint	HR-010	0	-	2075	devin-2	other
+1795287871	heartbeat	HR-010	0	-	2495	devin-2	other
