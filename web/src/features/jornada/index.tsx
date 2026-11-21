@@ -7,7 +7,7 @@ import { getDemoRole, setDemoRole } from "../../lib/api";
 import { cachedJornada, db, refreshSnapshot } from "../../lib/db";
 import { findCandidates, type Candidate } from "../../lib/match";
 import { allOps, autoFlush, enqueue, flush, newId } from "../../lib/outbox";
-import { Button, Card, Chip, ConnectionBadge, Credential, Field, PageHeader, PageLayout, SectionHeader, Stepper, useOnline } from "../../lib/ui";
+import { Button, Card, Chip, Credential, Field, PageHeader, PageLayout, SectionHeader, Stat, Stepper, useOnline } from "../../lib/ui";
 import { buildConfirmOps, buildNewPatientOps, candidateMeta, pendingCount, todayLocal, type NewPatient, type QueuedOp } from "./jornadaLogic";
 
 const JORNADA_ID = "jor-tamazula-2026-11";
@@ -141,7 +141,6 @@ export default function Jornada() {
           lede="Busca a la paciente antes de registrarla: si ya vino, no se duplica."
           action={
             <div className="flex flex-wrap items-center gap-2">
-              <ConnectionBadge online={online} />
               {pending > 0 ? (
                 <Chip tone="warn" size="md">
                   {pending} {pending === 1 ? "pendiente" : "pendientes"} de sincronizar
@@ -460,9 +459,9 @@ function IssuedCard({ who, issued, pending, online, onNext }: { who: Who; issued
         {synced && who.kind === "existing" && (
           <>
             {png ? (
-              <img src={png} alt={`Credencial de ${name}, folio ${issued.folio}, con código QR`} className="w-full max-w-[440px] rounded-[22px] shadow-[var(--shadow)]" />
+              <div className="hr-cred-stage"><img src={png} alt={`Credencial de ${name}, folio ${issued.folio}, con código QR`} className="block w-full rounded-[var(--r-lg)] shadow-[var(--shadow)]" /></div>
             ) : (
-              <p className="display text-[40px] leading-none">{issued.folio}</p>
+              <Stat value={issued.folio} label="Folio" />
             )}
             <p>Folio {issued.folio}: es el mismo de su visita anterior. Entrégale su credencial.</p>
           </>
