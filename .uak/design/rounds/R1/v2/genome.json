@@ -1,0 +1,44 @@
+{
+  "id": "R1-v2",
+  "round": "R1",
+  "variant": 2,
+  "seed": 13157,
+  "screen": "landing",
+  "genes": {
+    "type": "condensed",
+    "scale": "bold",
+    "color": "dark media",
+    "layout": "editorial column",
+    "components": "soft",
+    "imagery": "3D cut-out",
+    "motion": "still",
+    "voice": "numbers first",
+    "stage": "three.js scroll-driven"
+  },
+  "recipe": "landing-story",
+  "why": {
+    "type": "spread",
+    "scale": "spread",
+    "color": "spread",
+    "layout": "spread",
+    "components": "spread",
+    "imagery": "prior 0.71",
+    "motion": "spread",
+    "voice": "spread",
+    "stage": "spread"
+  },
+  "ground": "dark",
+  "creativity": 3,
+  "composition": "monument",
+  "motif": {
+    "family": "specimen sheet",
+    "text": "the patient credential as a specimen sheet: one card, centered like a monument, every part labeled."
+  },
+  "fonts": {
+    "display": "Bebas Neue",
+    "display_weights": "400",
+    "body": "Fira Sans",
+    "body_weights": "400;600",
+    "url": "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Sans:wght@400;600&display=swap"
+  }
+}

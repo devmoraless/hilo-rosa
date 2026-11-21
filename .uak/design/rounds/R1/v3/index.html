@@ -1,0 +1,117 @@
+<!-- motif: Laura, the trusted daughter, drawn as one illustrated figure holding up the shared phone to scan her mother's credential. -->
+<!-- subject world: celular compartido, credencial QR EIRA-7K3P, persona de confianza (hija), código de 6 dígitos, jornada en Tamazula -->
+<!-- imagery gene product screenshot: the product cannot be captured yet, so the stage is an SVG illustration; three.js stage replaced by an SVG/CSS 12 s loop under the time budget. -->
+<!-- brand duo: EIRA deep rose #B7426C + EIRA pink #FFA9B8, from https://eiraac.org/css/main.css -->
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hilo Rosa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@700&family=Hind:wght@400;600&display=swap">
+<style>
+:root{
+  --white:#FFFFFF; --pink:#FFA9B8; --rose:#B7426C; --ink:#2B1420; --tint:#FFEFF2; --leaf:#6F9C76;
+  --display:"Saira Condensed", "Arial Narrow", sans-serif; --body:"Hind", system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--white);color:var(--ink);font:18px/1.55 var(--body)}
+a:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.hero{position:relative;min-height:100vh;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;padding:40px clamp(16px,5vw,96px)}
+.hero::before{content:"";position:absolute;right:-10%;bottom:-30%;width:75%;height:130%;background:var(--pink);transform:rotate(-14deg);z-index:0}
+.copy{position:relative;z-index:1;align-self:center}
+h1{font:700 clamp(42px,5.6vw,72px)/.98 var(--display);text-transform:none;color:var(--ink)}
+h1 span{display:block}
+h1 span:nth-child(2){padding-left:1.2em}
+h1 span:nth-child(3){padding-left:2.4em;color:var(--rose)}
+.lede{margin-top:26px;max-width:28em}
+.actions{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;height:52px;padding:0 28px;border-radius:10px;font:600 18px var(--body);text-decoration:none;background:var(--rose);color:#fff}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.badge{display:inline-flex;gap:8px;align-items:center;margin-bottom:22px;padding:6px 14px;border-radius:999px;background:var(--tint);font-weight:600;font-size:15px}
+.dot{width:10px;height:10px;border-radius:50%;background:#C62828;animation:net 12s infinite}
+@keyframes net{0%,55%{background:#C62828}60%,100%{background:#2E7D32}}
+.badge .on{display:none}
+.stage{position:relative;z-index:1;align-self:end;justify-self:center;width:min(560px,100%)}
+.stage svg{width:100%;height:auto;display:block}
+.screen-a{animation:sa 12s infinite}.screen-b{animation:sb 12s infinite}
+@keyframes sa{0%,45%{opacity:1}50%,100%{opacity:0}}
+@keyframes sb{0%,45%{opacity:0}50%,95%{opacity:1}100%{opacity:0}}
+.scan{animation:scan 3s ease-in-out infinite}
+@keyframes scan{0%,100%{transform:translateY(0)}50%{transform:translateY(60px)}}
+section{padding:96px clamp(16px,5vw,96px)}
+h2{font:700 clamp(32px,4vw,52px)/1 var(--display);max-width:20em}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px}
+.cards article{padding:24px;border-radius:16px;background:var(--tint);border-top:6px solid var(--rose)}
+.cards h3{font:700 26px/1.1 var(--display);margin-bottom:8px}
+footer{padding:36px clamp(16px,5vw,96px);font-size:15px;background:var(--ink);color:var(--tint)}
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:20px}
+  h1{font-size:44px} h1 span:nth-child(2){padding-left:.6em} h1 span:nth-child(3){padding-left:1.2em}
+  .cards{grid-template-columns:1fr}
+  .hero::before{width:140%;height:60%;bottom:-10%}
+}
+@media (prefers-reduced-motion:reduce){.screen-a,.screen-b,.scan,.dot{animation:none}.screen-a{opacity:0}}
+</style>
+</head>
+<body>
+<main>
+<header class="hero">
+  <div class="copy">
+    <span class="badge"><span class="dot"></span>Funciona sin conexión</span>
+    <h1><span>Que ningún</span><span>resultado se quede</span><span>sin dueña.</span></h1>
+    <p class="lede">Su hija escanea la credencial, confirma quién es y lee el resultado que la médica ya autorizó. Sin WhatsApp, sin nombres en un chat.</p>
+    <div class="actions"><a class="btn" href="#flujo">Ver el recorrido</a><a class="btn alt" href="#quien">Para quién es</a></div>
+  </div>
+  <div class="stage" aria-label="Ilustración: Laura sostiene el celular y escanea la credencial de su mamá; la pantalla muestra Tu resultado salió normal">
+    <svg viewBox="0 0 560 600" role="img">
+      <!-- credential on the table -->
+      <g transform="translate(40 470) rotate(-8)">
+        <rect width="200" height="126" rx="14" fill="#fff" stroke="#2B1420" stroke-width="3"/>
+        <text x="16" y="34" font-family="Hind" font-weight="600" font-size="14" fill="#B7426C">EIRA</text>
+        <text x="16" y="104" font-family="Saira Condensed" font-weight="700" font-size="30" fill="#2B1420">EIRA-7K3P</text>
+        <rect x="128" y="16" width="56" height="56" fill="#2B1420"/><rect x="136" y="24" width="16" height="16" fill="#fff"/><rect x="160" y="48" width="16" height="16" fill="#fff"/>
+      </g>
+      <!-- Laura -->
+      <path d="M200 600 C200 470 250 410 330 410 C410 410 460 470 460 600Z" fill="#B7426C"/>
+      <rect x="310" y="350" width="40" height="70" rx="16" fill="#C98A6B"/>
+      <ellipse cx="330" cy="300" rx="70" ry="80" fill="#C98A6B"/>
+      <path d="M255 300 C250 210 300 200 335 205 C390 210 415 250 405 320 C400 270 370 245 330 250 C300 252 270 270 262 330Z" fill="#2B1420"/>
+      <path d="M262 320 C250 380 255 430 240 470 L280 440 C270 400 270 360 275 330Z" fill="#2B1420"/>
+      <circle cx="305" cy="305" r="6" fill="#2B1420"/><circle cx="355" cy="305" r="6" fill="#2B1420"/>
+      <path d="M310 345 Q330 360 350 345" stroke="#2B1420" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- arm + phone -->
+      <path d="M430 460 C470 420 470 330 440 260" stroke="#C98A6B" stroke-width="34" stroke-linecap="round" fill="none"/>
+      <g transform="translate(400 110) rotate(10)">
+        <rect width="130" height="230" rx="18" fill="#2B1420"/>
+        <rect x="9" y="16" width="112" height="198" rx="8" fill="#fff"/>
+        <g class="screen-a">
+          <rect x="24" y="50" width="82" height="82" fill="none" stroke="#B7426C" stroke-width="4" stroke-dasharray="18 46"/>
+          <rect class="scan" x="24" y="60" width="82" height="3" fill="#B7426C"/>
+          <text x="65" y="170" text-anchor="middle" font-family="Hind" font-size="13" fill="#2B1420">Escanea la</text>
+          <text x="65" y="186" text-anchor="middle" font-family="Hind" font-size="13" fill="#2B1420">credencial</text>
+        </g>
+        <g class="screen-b">
+          <circle cx="65" cy="70" r="26" fill="#6F9C76"/><path d="M53 70 l9 9 l16 -18" stroke="#fff" stroke-width="5" fill="none"/>
+          <text x="65" y="125" text-anchor="middle" font-family="Saira Condensed" font-weight="700" font-size="17" fill="#2B1420">Tu resultado</text>
+          <text x="65" y="145" text-anchor="middle" font-family="Saira Condensed" font-weight="700" font-size="17" fill="#2B1420">salió normal</text>
+          <text x="65" y="172" text-anchor="middle" font-family="Hind" font-size="12" fill="#2B1420">Regresa en 1 año</text>
+        </g>
+      </g>
+      <circle cx="455" cy="350" r="22" fill="#C98A6B"/>
+    </svg>
+  </div>
+</header>
+<section id="flujo">
+  <h2>Hoy más de 300 resultados al mes dependen de una sola cuenta de WhatsApp. Si se bloquea, las entregas se paran.</h2>
+  <div class="cards" id="quien">
+    <article><h3>Rosa, capturista</h3><p>Sin internet, ve "posible coincidencia 92%" y confirma: es ella. No duplica a quien ya vino.</p></article>
+    <article><h3>Laboratorio</h3><p>Arrastra los PDFs; se asocian por folio sin ver el expediente.</p></article>
+    <article><h3>Dra. Ana</h3><p>Captura NILM y autoriza con su cédula. El aviso no dice el diagnóstico.</p></article>
+    <article><h3>María y Laura</h3><p>Saben el resultado sin ir a Ciudad Guzmán.</p></article>
+  </div>
+</section>
+</main>
+<footer>Hilo Rosa · prototipo con datos ficticios para EIRA, fundada en 2017 en Zapotlán el Grande, Jalisco.</footer>
+</body>
+</html>

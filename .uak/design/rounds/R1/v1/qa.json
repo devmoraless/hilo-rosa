@@ -1,0 +1,141 @@
+{
+  "1920": {
+    "w": 1920,
+    "gl": true,
+    "overflow": false,
+    "share": 88,
+    "upscaled": [],
+    "distorted": [],
+    "frameMs": 16,
+    "fps": 63,
+    "longTasks": 0,
+    "heapMB": 10,
+    "texts": 7,
+    "words": 52,
+    "stage": true,
+    "overStage": 0,
+    "overFocal": 0,
+    "sig": {
+      "head": [
+        0.54,
+        0.19,
+        0.83,
+        0.54
+      ],
+      "stage": [
+        0.05,
+        0.09,
+        0.51,
+        0.9
+      ],
+      "focal": [
+        0.28,
+        0.5
+      ],
+      "lum": 0.95,
+      "hue": 330,
+      "mass": {
+        "centroid": [
+          0.32,
+          0.53
+        ],
+        "box": [
+          0.15,
+          0.13,
+          0.55,
+          0.76
+        ],
+        "share": 0.05
+      }
+    },
+    "errors": 0,
+    "first": "",
+    "budget_ms": 20,
+    "heavy": false,
+    "dense": false
+  },
+  "1280": {
+    "w": 1280,
+    "gl": true,
+    "overflow": false,
+    "share": 90,
+    "upscaled": [],
+    "distorted": [],
+    "frameMs": 17,
+    "fps": 59,
+    "longTasks": 0,
+    "heapMB": 10,
+    "texts": 7,
+    "words": 52,
+    "stage": true,
+    "overStage": 0,
+    "overFocal": 0,
+    "sig": {
+      "head": [
+        0.54,
+        0.07,
+        0.95,
+        0.52
+      ],
+      "stage": [
+        0.05,
+        0.11,
+        0.5,
+        0.91
+      ],
+      "focal": [
+        0.28,
+        0.51
+      ],
+      "lum": 0.95,
+      "hue": 330
+    },
+    "errors": 0,
+    "first": "",
+    "budget_ms": 20,
+    "heavy": false,
+    "dense": false
+  },
+  "390": {
+    "w": 390,
+    "gl": true,
+    "overflow": false,
+    "share": 90,
+    "upscaled": [],
+    "distorted": [],
+    "frameMs": 17,
+    "fps": 59,
+    "longTasks": 0,
+    "heapMB": 10,
+    "texts": 7,
+    "words": 52,
+    "stage": true,
+    "overStage": 0,
+    "overFocal": 0,
+    "sig": {
+      "head": [
+        0.05,
+        0.03,
+        0.95,
+        0.19
+      ],
+      "stage": [
+        0.05,
+        0.67,
+        0.95,
+        1
+      ],
+      "focal": [
+        0.5,
+        0.84
+      ],
+      "lum": 0.95,
+      "hue": 330
+    },
+    "errors": 0,
+    "first": "",
+    "budget_ms": 20,
+    "heavy": false,
+    "dense": false
+  }
+}

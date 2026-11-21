@@ -1,0 +1,114 @@
+{
+  "1920": {
+    "w": 1920,
+    "gl": true,
+    "overflow": false,
+    "share": 73,
+    "upscaled": [],
+    "distorted": [],
+    "frameMs": 17,
+    "fps": 59,
+    "longTasks": 0,
+    "heapMB": 10,
+    "texts": 14,
+    "words": 82,
+    "stage": false,
+    "overStage": 0,
+    "overFocal": 0,
+    "sig": {
+      "head": [
+        0.21,
+        0.59,
+        0.79,
+        0.66
+      ],
+      "stage": null,
+      "focal": [
+        0.5,
+        0.63
+      ],
+      "lum": 0.83,
+      "hue": 330,
+      "mass": null
+    },
+    "errors": 0,
+    "first": "",
+    "budget_ms": 50,
+    "heavy": false,
+    "dense": true
+  },
+  "1280": {
+    "w": 1280,
+    "gl": true,
+    "overflow": false,
+    "share": 86,
+    "upscaled": [],
+    "distorted": [],
+    "frameMs": 17,
+    "fps": 59,
+    "longTasks": 0,
+    "heapMB": 10,
+    "texts": 14,
+    "words": 82,
+    "stage": false,
+    "overStage": 0,
+    "overFocal": 0,
+    "sig": {
+      "head": [
+        0.08,
+        0.64,
+        0.92,
+        0.74
+      ],
+      "stage": null,
+      "focal": [
+        0.5,
+        0.69
+      ],
+      "lum": 0.83,
+      "hue": 330
+    },
+    "errors": 0,
+    "first": "",
+    "budget_ms": 50,
+    "heavy": false,
+    "dense": true
+  },
+  "390": {
+    "w": 390,
+    "gl": true,
+    "overflow": false,
+    "share": 89,
+    "upscaled": [],
+    "distorted": [],
+    "frameMs": 17,
+    "fps": 59,
+    "longTasks": 0,
+    "heapMB": 10,
+    "texts": 12,
+    "words": 74,
+    "stage": false,
+    "overStage": 0,
+    "overFocal": 0,
+    "sig": {
+      "head": [
+        0.04,
+        0.61,
+        0.96,
+        0.71
+      ],
+      "stage": null,
+      "focal": [
+        0.5,
+        0.66
+      ],
+      "lum": 0.83,
+      "hue": 330
+    },
+    "errors": 0,
+    "first": "",
+    "budget_ms": 50,
+    "heavy": false,
+    "dense": false
+  }
+}

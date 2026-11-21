@@ -1,0 +1,44 @@
+{
+  "id": "R1-v1",
+  "round": "R1",
+  "variant": 1,
+  "seed": 13157,
+  "screen": "landing",
+  "genes": {
+    "type": "serif display",
+    "scale": "bold",
+    "color": "light paper",
+    "layout": "editorial column",
+    "components": "glass",
+    "imagery": "type only",
+    "motion": "still",
+    "voice": "plain",
+    "stage": "SVG/CSS animation"
+  },
+  "recipe": "motionsites",
+  "why": {
+    "type": "spread",
+    "scale": "spread",
+    "color": "spread",
+    "layout": "spread",
+    "components": "spread",
+    "imagery": "spread",
+    "motion": "spread",
+    "voice": "spread",
+    "stage": "spread"
+  },
+  "ground": "light",
+  "creativity": 3,
+  "composition": "stage left, copy right",
+  "motif": {
+    "family": "cartography",
+    "text": "a pink thread traced on the map of southern Jalisco, from a rural jornada in Tamazula to the lab and back to a daughter's phone."
+  },
+  "fonts": {
+    "display": "Playfair Display",
+    "display_weights": "700",
+    "body": "Jost",
+    "body_weights": "400;600",
+    "url": "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Jost:wght@400;600&display=swap"
+  }
+}

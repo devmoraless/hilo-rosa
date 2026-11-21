@@ -1,0 +1,76 @@
+<!-- motif: the shared family cellphone, drawn large behind the headline, its screen living through one jornada. -->
+<!-- subject world: celular compartido, badge Sin conexión, contador "3 pendientes", folio EIRA-7K3P, jornada de Tamazula -->
+<!-- stage gene real video with a live overlay: no team footage exists, so the phone is an SVG with the live overlay animated in a 12 s loop. -->
+<!-- brand: EIRA pink #FFA9B8 over a saturated field of EIRA plum #6A2B51, from https://eiraac.org/css/main.css -->
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hilo Rosa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@600&family=Overpass:wght@400;600&display=swap">
+<style>
+:root{
+  --field:#4A1B39; --plum:#6A2B51; --pink:#FFA9B8; --paper:#FFF4F6; --red:#FF6B6B; --green:#7CD39A;
+  --display:"Fira Code", ui-monospace, monospace; --body:"Overpass", system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--field);color:var(--paper);font:17px/1.6 var(--body)}
+a:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+.hero{position:relative;min-height:100vh;display:grid;place-items:center;text-align:center;padding:40px 16px;overflow:hidden}
+.phone{position:absolute;left:50%;top:50%;width:min(380px,74vw);transform:translate(-50%,-50%) rotate(-6deg);opacity:.95}
+.phone svg{width:100%;height:auto;display:block}
+.copy{position:relative;z-index:2;max-width:900px;padding:28px 28px 32px;background:var(--field);border:3px solid var(--pink);border-radius:6px;margin-top:38vh}
+h1{font:600 clamp(30px,4.4vw,56px)/1.15 var(--display);letter-spacing:-.02em}
+.lede{margin:14px auto 0;max-width:36em;color:#F2CBD6}
+.btn{display:inline-flex;align-items:center;height:48px;padding:0 26px;border-radius:4px;background:var(--pink);color:var(--field);font:600 17px var(--body);text-decoration:none;margin-top:22px}
+.ov{opacity:0;animation:ov 12s infinite}
+.o2{animation-delay:3s}.o3{animation-delay:6s}.o4{animation-delay:9s}
+.o1{animation-delay:0s}
+@keyframes ov{0%{opacity:0}3%,22%{opacity:1}25%,100%{opacity:0}}
+section{padding:110px clamp(16px,6vw,120px);border-top:3px solid var(--plum)}
+.chapter{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start;max-width:1200px;margin:0 auto}
+.chapter .k{font:600 40px/1 var(--display);color:var(--pink)}
+h2{font:600 clamp(24px,3vw,36px)/1.25 var(--display);margin-bottom:14px}
+.chapter p{max-width:36em}
+.s2{background:var(--plum)}
+footer{padding:36px clamp(16px,6vw,120px);font-size:15px;color:#F2CBD6}
+@media (max-width:760px){
+  .phone{top:34%;width:72vw}.copy{margin-top:46vh;padding:20px}
+  h1{font-size:30px}
+  .chapter{grid-template-columns:1fr;gap:12px}
+}
+@media (prefers-reduced-motion:reduce){.ov{animation:none}.o4{opacity:1}}
+</style>
+</head>
+<body>
+<main>
+<header class="hero">
+  <div class="phone" aria-label="Celular compartido: sin conexión, coincidencia 92%, folio EIRA-7K3P, resultado normal">
+    <svg viewBox="0 0 300 560" role="img">
+      <rect width="300" height="560" rx="40" fill="#FFF4F6"/>
+      <rect x="14" y="40" width="272" height="480" rx="14" fill="#2A0F21"/>
+      <rect x="120" y="16" width="60" height="8" rx="4" fill="#C9A0B2"/>
+      <g class="ov o1"><rect x="40" y="80" width="150" height="34" rx="17" fill="#FF6B6B"/><text x="56" y="103" font-family="Overpass" font-weight="600" font-size="16" fill="#2A0F21">Sin conexión</text>
+        <text x="40" y="170" font-family="Fira Code" font-size="20" fill="#FFA9B8">Maria Lopez_</text></g>
+      <g class="ov o2"><text x="40" y="110" font-family="Fira Code" font-size="44" fill="#FFA9B8">92%</text><text x="40" y="145" font-family="Overpass" font-size="16" fill="#FFF4F6">María López Hernández</text><text x="40" y="168" font-family="Overpass" font-size="14" fill="#C9A0B2">1974 · Tamazula</text>
+        <rect x="40" y="200" width="100" height="40" rx="6" fill="#FFA9B8"/><text x="62" y="226" font-family="Overpass" font-weight="600" font-size="16" fill="#2A0F21">Es ella</text></g>
+      <g class="ov o3"><text x="40" y="110" font-family="Overpass" font-size="16" fill="#7CD39A">En línea · 3 → 0 pendientes</text><text x="40" y="170" font-family="Fira Code" font-size="30" fill="#FFF4F6">EIRA-7K3P</text>
+        <rect x="40" y="200" width="120" height="120" fill="#FFF4F6"/><rect x="52" y="212" width="36" height="36" fill="#2A0F21"/><rect x="112" y="272" width="36" height="36" fill="#2A0F21"/><rect x="112" y="212" width="20" height="20" fill="#2A0F21"/></g>
+      <g class="ov o4"><text x="40" y="120" font-family="Fira Code" font-size="22" fill="#FFA9B8">Tu resultado</text><text x="40" y="150" font-family="Fira Code" font-size="22" fill="#FFA9B8">salió normal.</text><text x="40" y="186" font-family="Overpass" font-size="16" fill="#FFF4F6">Regresa en 1 año.</text></g>
+    </svg>
+  </div>
+  <div class="copy">
+    <h1>Que ningún resultado se quede sin dueña.</h1>
+    <p class="lede">Registra a cada paciente una vez, aun sin internet. Ella o su hija abren el resultado autorizado con la credencial.</p>
+    <a class="btn" href="#c1">Seguir el resultado de María</a>
+  </div>
+</header>
+<section id="c1"><div class="chapter"><span class="k">jornada</span><div><h2>Sin red en Tamazula, la reconoce.</h2><p>Rosa teclea "Maria Lopez" y ve: posible coincidencia 92%, ultrasonido mar 2025. Confirma que es ella y agrega a Laura, su hija.</p></div></div></section>
+<section class="s2"><div class="chapter"><span class="k">folio</span><div><h2>Al volver la red, sale la credencial.</h2><p>Los 3 pendientes se sincronizan y María recibe el folio EIRA-7K3P con su QR. El laboratorio sube los PDFs y se asocian por folio.</p></div></div></section>
+<section><div class="chapter"><span class="k">firma</span><div><h2>La médica autoriza antes que nadie lo vea.</h2><p>La Dra. Ana captura NILM y firma con su cédula. El aviso a Laura no dice el diagnóstico.</p></div></div></section>
+<section class="s2"><div class="chapter"><span class="k">acceso</span><div><h2>Laura escanea y lee.</h2><p>Fecha de nacimiento, código de 6 dígitos y "Tu resultado salió normal, regresa en 1 año". Hoy son más de 300 resultados al mes por una sola cuenta de WhatsApp.</p></div></div></section>
+</main>
+<footer>Hilo Rosa · prototipo con datos ficticios para EIRA, fundada en 2017 en Zapotlán el Grande, Jalisco.</footer>
+</body>
+</html>

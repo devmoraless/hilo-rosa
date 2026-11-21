@@ -1,0 +1,44 @@
+{
+  "id": "R1-v3",
+  "round": "R1",
+  "variant": 3,
+  "seed": 13157,
+  "screen": "landing",
+  "genes": {
+    "type": "condensed",
+    "scale": "standard",
+    "color": "brand duo",
+    "layout": "product screen first",
+    "components": "glass",
+    "imagery": "product screenshot",
+    "motion": "still",
+    "voice": "bold claim",
+    "stage": "three.js scroll-driven"
+  },
+  "recipe": "frontend-design",
+  "why": {
+    "type": "spread",
+    "scale": "spread",
+    "color": "spread",
+    "layout": "spread",
+    "components": "spread",
+    "imagery": "spread",
+    "motion": "spread",
+    "voice": "spread",
+    "stage": "spread"
+  },
+  "ground": "light",
+  "creativity": 3,
+  "composition": "diagonal",
+  "motif": {
+    "family": "illustrated character",
+    "text": "Laura, the trusted daughter, drawn as one illustrated figure holding up the shared phone to scan her mother's credential."
+  },
+  "fonts": {
+    "display": "Saira Condensed",
+    "display_weights": "700",
+    "body": "Hind",
+    "body_weights": "400;600",
+    "url": "https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@700&family=Hind:wght@400;600&display=swap"
+  }
+}

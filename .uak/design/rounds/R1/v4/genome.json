@@ -1,0 +1,44 @@
+{
+  "id": "R1-v4",
+  "round": "R1",
+  "variant": 4,
+  "seed": 13157,
+  "screen": "landing",
+  "genes": {
+    "type": "mono-led",
+    "scale": "restrained",
+    "color": "saturated field",
+    "layout": "scroll story",
+    "components": "solid blocks",
+    "imagery": "illustration",
+    "motion": "scroll",
+    "voice": "plain",
+    "stage": "real video with a live overlay"
+  },
+  "recipe": "design-taste-frontend",
+  "why": {
+    "type": "wildcard",
+    "scale": "wildcard",
+    "color": "wildcard",
+    "layout": "wildcard",
+    "components": "wildcard",
+    "imagery": "wildcard",
+    "motion": "wildcard",
+    "voice": "wildcard",
+    "stage": "wildcard"
+  },
+  "ground": "dark",
+  "creativity": 3,
+  "composition": "poster",
+  "motif": {
+    "family": "everyday object",
+    "text": "the shared family cellphone, drawn large behind the headline, its screen living through one jornada."
+  },
+  "fonts": {
+    "display": "Fira Code",
+    "display_weights": "600",
+    "body": "Overpass",
+    "body_weights": "400;600",
+    "url": "https://fonts.googleapis.com/css2?family=Fira+Code:wght@600&family=Overpass:wght@400;600&display=swap"
+  }
+}
