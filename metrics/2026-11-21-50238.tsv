@@ -9,6 +9,7 @@
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
+# ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 1795283332	clock	-	-	-	-	-	claude-code
 1795283405	register-reviewer	-	0	-	8947	devmoraless	claude-code
 1795283576	lint	-	0	-	58717	-	claude-code
@@ -138,3 +139,16 @@
 1795288316	done	HR-013	3	red-missing	36435	dm-1	claude-code
 1795288365	done	HR-013	0	-	41051	dm-1	claude-code
 1795288685	allow	-	0	-	17496	devmoraless	claude-code
+1795289979	status	-	0	-	28255	-	claude-code
+1795290008	review	HR-008	0	-	10068	dm-3	claude-code
+1795290018	review	HR-010	0	-	9602	dm-4	claude-code
+1795290026	review	HR-013	0	-	8419	dm-3	claude-code
+1795290057	status	HR-010	0	-	5855	-	claude-code
+1795290237	lint	-	0	-	53390	-	claude-code
+1795290317	review	HR-008	0	-	14500	dm-3	claude-code
+1795290337	status	-	0	-	6858	-	claude-code
+1795290345	review	HR-010	0	-	27532	dm-4	claude-code
+1795290393	review	HR-013	0	-	46660	dm-3	claude-code
+1795290404	merge	HR-008	0	-	2269	devin-1	claude-code
+1795290415	merge	HR-010	0	-	2284	devin-2	claude-code
+1795290603	merge	HR-013	0	-	180522	dm-1	claude-code
