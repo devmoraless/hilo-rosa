@@ -51,3 +51,15 @@ Append-only; added to .uak/TASKS.md from main. Why: adding tasks never waits for
 - **Acceptance:**
   - Marcar celular compartido como supuesto a validar
 - **Verify:** `uv run pytest -q app/tests/test_e2e_demo.py && test -s README.md && test -s docs/PITCH.md`
+
+## HR-017 · DEMO.md y README apuntan a la pantalla de bitácora (follow-up of HR-012)
+
+- **Type:** follow-up
+- **Priority:** P1
+- **Depends on:** HR-012
+- **Follow-up of:** HR-012
+- **Paths:** README.md, docs/PITCH.md, docs/DEMO.md, docs/media/, app/tests/test_e2e_demo.py
+- **Freeze-Allowed:** no
+- **Acceptance:**
+  - DEMO.md y README apuntan a la pantalla de bitácora
+- **Verify:** `uv run pytest -q app/tests/test_e2e_demo.py && test -s README.md && test -s docs/PITCH.md`

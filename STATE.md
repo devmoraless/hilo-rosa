@@ -1,7 +1,7 @@
 # STATE
 
 Phase: execution
-Updated: 1795292517
+Updated: 1795294291
 AVAILABLE: -
 CLAIMED: -
 BLOCKED: -
@@ -13,11 +13,11 @@ Claims (first 24; status --task ID shows detail):
 
 Blockers: BLOCKED tasks; use status --task ID --summary.
 Current decisions (last 5):
-- 1795288678 | allow | devmoraless | test change: HR-010 | Why: pdf_url assertion → /api/access/me/results/{id}/pdf
 - 1795290917 | HR-014 | follow-up of HR-003 by dm-5: IMPLEMENTADO_VS_SIMULADO refleja lo integrado | Why: same Paths, no scope change
 - 1795291178 | plan | devmoraless/devmoraless | tasks added: HR-015 | Why: backlog without PR (Plan-Channel: claims)
 - 1795291408 | HR-016 | follow-up of HR-012 by dm-1: Marcar celular compartido como supuesto a validar | Why: same Paths, no scope change
 - 1795292303 | HR-015 | sección bajo el kanban; estilos inline en Bitacora.tsx (medica.css fuera de Paths) | Why: Paths
+- 1795294291 | HR-017 | follow-up of HR-012 by dm-1: DEMO.md y README apuntan a la pantalla de bitácora | Why: same Paths, no scope change
 
 Global next step: available P0; else review PRs, tests, demo, rehearsal.
 Why: bounded snapshot to resume without rereading history.
