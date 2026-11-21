@@ -13,4 +13,5 @@
 @media (max-width: 600px) {
   .access-explanation { font-size: 20px; }
   .access-actions .hr-btn { width: 100%; }
+  .access-sticky { position: static; }
 }
