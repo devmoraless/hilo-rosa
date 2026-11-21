@@ -62,7 +62,7 @@ def test_full_demo_flow_from_offline_registration_to_family_access() -> None:
     token = "Xb7nQ2vRk9TzWm4pHs8dLc"  # María's QR token in the seed (opaque, no personal data)
     who = c.get(f"/api/access/token/{token}").json()
     laura = next(k for k in who["contactos"] if k["parentesco"] == "hija")
-    start = c.post("/api/access/start", json={"token": token, "quien": "contacto", "contacto_id": laura["id"], "fecha_nacimiento": "1974-05-12"}).json()
+    start = c.post("/api/access/start", json={"token": token, "quien": "contacto", "contacto_id": laura["id"], "fecha_nacimiento": "2026-06-02"}).json()
     assert start["codigo_demo"] and len(start["codigo_demo"]) == 6
     session = c.post("/api/access/verify", json={"challenge_id": start["challenge_id"], "codigo": start["codigo_demo"]}).json()
     bearer = {"Authorization": f"Bearer {session['session_token']}"}

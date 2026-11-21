@@ -80,7 +80,7 @@ def test_lab_role_cannot_see_patient_record():
         assert out["sugerencia_patient_id"] is None
         assert out["sugerencia_nombre"] is None
     body = r.text + lab.get("/api/results").text
-    for secreto in ("María", "López", "Guadalupe", "1974-05-12", "+52341", "pat-"):
+    for secreto in ("María", "López", "Guadalupe", "2026-06-02", "+52341", "pat-"):
         assert secreto not in body
     assert medica.get("/api/results").json()[0]["paciente_nombre"] is not None
     for role in (None, "capturista", "paciente"):

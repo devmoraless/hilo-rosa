@@ -18,7 +18,7 @@ def test_reset_demo_loads_maria_and_tamazula_jornada() -> None:
     assert body["ok"] is True
     with store.session() as s:
         maria = s.exec(select(Patient).where(Patient.apellidos == "López Hernández", Patient.nombre == "María")).one()
-        assert maria.fecha_nacimiento.startswith("1974")
+        assert maria.fecha_nacimiento.startswith("2026")
         assert maria.municipio == "Tamazula de Gordiano"
         assert maria.folio == "EIRA-7K3P"
         assert "-" not in maria.qr_token and maria.nombre not in maria.qr_token

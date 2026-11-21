@@ -40,7 +40,7 @@ MARIA = {
     "folio": "EIRA-7K3P",
     "nombre": "María",
     "apellidos": "López Hernández",
-    "fecha_nacimiento": "1974-05-12",
+    "fecha_nacimiento": "2026-06-02",
     "municipio": "Tamazula de Gordiano",
     "telefono": "+523411000001",  # Laura's phone (shared); fictitious
     "telefono_propio": False,
@@ -166,7 +166,7 @@ def _build_match_cases() -> list[dict]:
         "query": {
             "nombre": "Maria",
             "apellidos": "Lopez",
-            "fecha_nacimiento": "1974-05-12",
+            "fecha_nacimiento": "2026-06-02",
             "municipio": "Tamazula de Gordiano",
             "telefono": None,
         },
