@@ -23,3 +23,4 @@ Why: a reversible option after 15 min keeps work moving.
 - 1795291408 | HR-016 | follow-up of HR-012 by dm-1: Marcar celular compartido como supuesto a validar | Why: same Paths, no scope change
 - 1795292303 | HR-015 | sección bajo el kanban; estilos inline en Bitacora.tsx (medica.css fuera de Paths) | Why: Paths
 - 1795294291 | HR-017 | follow-up of HR-012 by dm-1: DEMO.md y README apuntan a la pantalla de bitácora | Why: same Paths, no scope change
+- 1795294395 | HR-018 | follow-up of HR-014 by dm-5: Fila de bitácora: ya tiene pantalla | Why: same Paths, no scope change

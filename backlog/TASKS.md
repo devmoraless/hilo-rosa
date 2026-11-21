@@ -63,3 +63,15 @@ Append-only; added to .uak/TASKS.md from main. Why: adding tasks never waits for
 - **Acceptance:**
   - DEMO.md y README apuntan a la pantalla de bitácora
 - **Verify:** `uv run pytest -q app/tests/test_e2e_demo.py && test -s README.md && test -s docs/PITCH.md`
+
+## HR-018 · Fila de bitácora: ya tiene pantalla (follow-up of HR-014)
+
+- **Type:** follow-up
+- **Priority:** P1
+- **Depends on:** HR-014
+- **Follow-up of:** HR-014
+- **Paths:** docs/ARQUITECTURA.md, docs/IMPLEMENTADO_VS_SIMULADO.md, docs/SEGURIDAD.md, docs/RIESGOS_Y_PILOTO.md, docs/PREGUNTAS_EIRA.md
+- **Freeze-Allowed:** no
+- **Acceptance:**
+  - Fila de bitácora: ya tiene pantalla
+- **Verify:** `for f in ARQUITECTURA IMPLEMENTADO_VS_SIMULADO SEGURIDAD RIESGOS_Y_PILOTO PREGUNTAS_EIRA; do test -s docs/$f.md || exit 1; done`
