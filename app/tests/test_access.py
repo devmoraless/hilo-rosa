@@ -12,6 +12,7 @@ def access_client(monkeypatch):
     clock = [1000.0]
     monkeypatch.setattr("app.services.otp.time.time", lambda: clock[0])
     with TestClient(app) as client:
+        client.headers["X-Demo-Role"] = "medica"
         yield client, clock
 
 
@@ -201,3 +202,21 @@ def test_audit_detects_tampering(access_client):
     audit = client.get("/api/audit").json()
     assert audit["integridad_ok"] is False
     assert audit["primer_registro_alterado"] == 0
+
+
+@pytest.mark.parametrize("role", [None, "paciente", "unknown"])
+def test_audit_rejects_non_staff(access_client, role):
+    client, _ = access_client
+    client.headers.pop("X-Demo-Role")
+    headers = {"X-Demo-Role": role} if role else {}
+    response = client.get("/api/audit", headers=headers)
+    assert response.status_code == 403
+    assert "entries" not in response.json()
+
+
+@pytest.mark.parametrize("role", ["medica", "capturista"])
+def test_audit_allows_staff(access_client, role):
+    client, _ = access_client
+    response = client.get("/api/audit", headers={"X-Demo-Role": role})
+    assert response.status_code == 200
+    assert response.json()["integridad_ok"] is True
