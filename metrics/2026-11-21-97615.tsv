@@ -1,6 +1,7 @@
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
+# ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 1795284530	next	-	0	-	3586	devin-1	other
 1795284547	review	HR-004	0	-	7774	devin-1	other
 1795284551	status	HR-004	0	-	945	devin-1	other
@@ -49,3 +50,28 @@
 1795286484	claim	HR-008	0	-	2914	devin-1	other
 1795286485	inbox	-	0	-	1014	devin-1	other
 1795286583	red	HR-008	-	-	-	devin-1	other
+1795286671	review	HR-005	0	-	3966	devin-2	other
+1795286676	status	HR-005	0	-	1353	devin-2	other
+1795286702	review	HR-005	0	-	3599	devin-2	other
+1795286710	status	HR-010	0	-	1243	devin-2	other
+1795286721	claim	HR-010	0	-	2625	devin-2	other
+1795286722	inbox	-	0	-	1002	devin-2	other
+1795286738	status	-	0	-	1058	devin-2	other
+1795286748	status	HR-009	0	-	1127	devin-2	other
+1795286781	next	-	0	-	1651	devin-2	other
+1795286784	map	-	-	-	-	devin-2	other
+1795286811	red	HR-010	-	-	-	devin-2	other
+1795286925	msg	-	0	-	2421	devin-2	other
+1795286928	msg	-	0	-	2280	devin-2	other
+1795286956	inbox	-	0	-	1001	devin-2	other
+1795286977	msg	-	0	-	2513	devin-2	other
+1795286981	inbox	-	0	-	3328	devin-2	other
+1795286983	checkpoint	HR-010	0	-	2601	devin-2	other
+1795287017	checkpoint	HR-010	0	-	2377	devin-2	other
+1795287047	heartbeat	HR-010	0	-	2576	devin-2	other
+1795287060	inbox	-	0	-	975	devin-2	other
+1795287083	heartbeat	HR-010	0	-	2553	devin-2	other
+1795287134	heartbeat	HR-010	0	-	2259	devin-2	other
+1795287198	heartbeat	HR-010	0	-	2725	devin-2	other
+1795287239	heartbeat	HR-010	0	-	2536	devin-2	other
+1795287241	checkpoint	HR-010	0	-	2345	devin-2	other
