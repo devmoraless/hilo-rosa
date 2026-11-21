@@ -9,3 +9,4 @@ Why: a reversible option after 15 min keeps work moving.
 - 1795284480 | HR-001 | layout app/ + web/; main.tsx carga App.tsx por glob | Why: no tocar archivos de HR-002
 - 1795286060 | HR-002 | Direction 2 credencial, light EIRA blush bg (human pick) | Why: human picked v2 by looking, rejected dark bg
 - 1795286093 | deadline decision/HR-002-1795285107/1795286007 | BLOCKED_OTHER_TASK | Option: Direction 2 (credencial), fondo claro rosa EIRA en vez de oscuro; Why: elección del humano viendo las capturas: le gustó la animación de la credencial, no el fondo negro; no money, accounts, publishing or scope expansion.
+- 1795286981 | HR-010 | Reuse existing sync audit helpers; local send_otp fallback; QR dependency already installed | Why: Keep changes inside task Paths without duplicating dependency files
