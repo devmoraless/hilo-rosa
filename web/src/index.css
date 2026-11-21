@@ -14,7 +14,7 @@
   --brand: #ffa9b8;
   --line: #f0c6d0;
   --ok: #2e7d4f;
-  --warn: #b26a00;
+  --warn: #9a5b00;
   --bad: #c0392b;
   --ok-ink: #ffffff;
   --warn-ink: #ffffff;
@@ -262,4 +262,14 @@ a { color: var(--accent); }
   .hr-landing-steps h2 { font-size: 38px; }
   .hr-landing-steps dl > div { grid-template-columns: 1fr; gap: var(--sp-1); }
   .hr-match-score { font-size: 48px; }
+}
+
+@media (max-width: 600px) {
+  .hr-table thead { display: none; }
+  .hr-table, .hr-table tbody, .hr-table tr, .hr-table td { display: block; width: 100%; }
+  .hr-table tr { display: grid; grid-template-columns: 1fr auto; gap: var(--sp-1) var(--sp-3); padding: var(--sp-3) 0; border-bottom: 1px solid var(--line); }
+  .hr-table td { border: 0; padding: 0; width: auto; }
+  .hr-table td:first-child { grid-column: 1 / -1; font-weight: 600; }
+  .hr-step:not([data-state="current"]) { font-size: 0; gap: 0; }
+  .hr-step + .hr-step::before { width: 14px; margin-right: var(--sp-1); }
 }

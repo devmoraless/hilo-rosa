@@ -1,7 +1,6 @@
 // Locked screen 2 (recipe: flow). The reference HR-007 (jornada) and the acceso screen copy.
 // Static demo data from IDEA.md §3-4 (ficticia); the real feature replaces this at /jornada.
 import { Button, Card, Chip } from "../primitives";
-import { ConnectionBadge } from "../ConnectionBadge";
 import { Field } from "../Field";
 import { Stepper } from "../Stepper";
 import { PageHeader, PageLayout } from "../shell";
@@ -14,7 +13,7 @@ export function JornadaLocked() {
         <PageHeader
           title="Jornada · Tamazula de Gordiano"
           lede="Busca a la paciente antes de registrarla: si ya vino, no se duplica."
-          action={<ConnectionBadge online={false} pending={3} />}
+          action={<Chip tone="warn" size="md">3 pendientes de sincronizar</Chip>}
         />
       }
     >
@@ -35,6 +34,7 @@ export function JornadaLocked() {
             <Chip tone="brand">Nombre igual sin acentos</Chip>
             <Chip tone="brand">Mismo municipio</Chip>
             <Chip>Año de nacimiento igual</Chip>
+            <Chip tone="neutral">Datos de ejemplo</Chip>
           </div>
           <div className="hr-match-actions">
             <Button size="lg">Es ella</Button>

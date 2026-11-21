@@ -32,7 +32,7 @@
 | `--accent` | `#B7426C` | the primary action and the brand moment, nothing else |
 | `--accent-ink` | `#FFFFFF` | text on the accent (5.3:1) |
 | `--brand` | `#FFA9B8` | EIRA pink: fills, rules, selected pills; never text |
-| `--ok` / `--warn` / `--bad` | `#2E7D4F` / `#B26A00` / `#C0392B` | data states only (en línea, pendiente, sin conexión / alta prioridad) |
+| `--ok` / `--warn` / `--bad` | `#2E7D4F` / `#9A5B00` / `#C0392B` | data states only (en línea, pendiente, sin conexión / alta prioridad) |
 | `--ok-ink` / `--warn-ink` / `--bad-ink` | `#FFFFFF` / `#FFFFFF` / `#FFFFFF` | text on each state color (≥ 4.5:1) |
 Disabled: a primary button turns `--line` fill (`#F0C6D0`) with `--text-2` text and no shadow; never the accent at low opacity.
 
