@@ -74,7 +74,9 @@ function AccesoFlow({ token }: { token: string }) {
   function verify(event: FormEvent) {
     event.preventDefault();
     void run(async () => {
+      const version = requestVersion.current;
       const session = await postJson<AccessVerifyResponse>("/access/verify", { challenge_id: challenge?.challenge_id, codigo: code });
+      if (version !== requestVersion.current) return;
       setAccessSession(session.session_token); setVerified(true);
       await loadResults();
     });
