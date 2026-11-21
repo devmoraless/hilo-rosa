@@ -20,7 +20,7 @@
 | Acceso QR → fecha de nacimiento → OTP → sesión | Implementado | OTP 5 min / 5 intentos, sesión 15 min, token revocado → 410 | Pruebas de usabilidad con pacientes | HR-010 · integrado |
 | Almacén de OTP con TTL | Implementado (con respaldo) | Valkey si hay `VALKEY_URL`; si no, dict en memoria con expiración | Valkey/Redis gestionado | HR-010 · integrado |
 | Escaneo de QR con cámara | Implementado (con respaldo) | `html5-qrcode`; plan B: link `/p/<token>` precargado | — | HR-010 · integrado |
-| Bitácora con cadena SHA-256 | Implementado | `append()` + `verify()`; `GET /api/audit` devuelve la cadena e `integridad_ok` (aún sin pantalla propia) | Anclaje externo del hash / respaldo inmutable | HR-005 · integrado |
+| Bitácora con cadena SHA-256 | Implementado | `append()` + `verify()`; sección **Bitácora** en `/medica` con acciones en lenguaje claro, hashes encadenados y sello "Integridad ✅" / "⚠ Registro alterado" (HR-015); también `GET /api/audit` | Anclaje externo del hash / respaldo inmutable | HR-005 + HR-015 · integrado |
 | Roles (capturista, laboratorio, médica, paciente) | **Simulado** | Selector de rol que manda el header `X-Demo-Role` | Login real por usuario | HR-002 · integrado |
 | Pacientes, jornadas y PDFs de resultados | **Simulado** | Seed sintético: 40 pacientes con variaciones + 10 no-coincidencias; 2 PDFs generados | Datos reales bajo aviso de privacidad | HR-001 · integrado |
 | Texto claro sugerido por LLM (P2) | Opcional | Claude solo sugiere redacción; la médica edita y autoriza. Fallback: plantillas fijas | — | sin tarea en backlog v1 |
