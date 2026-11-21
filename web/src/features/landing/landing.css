@@ -1,0 +1,71 @@
+/* HR-011 · Landing. Tokens from web/src/index.css only (web/DESIGN.md). */
+.lp { overflow-x: clip; background: linear-gradient(180deg, var(--bg) 0, var(--bg-2) calc(100vh - 75px), var(--bg) calc(100vh - 74px)); }
+.lp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Hero: headline left, the turning credential right (the wow). */
+.lp-hero {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center; gap: var(--sp-7);
+  min-height: calc(100vh - 75px); max-width: 1320px; margin: 0 auto; padding: var(--sp-6) clamp(16px, 4vw, 48px);
+}
+.lp-hero h1 { font-size: var(--fs-6); line-height: 0.95; color: var(--text); max-width: 9.5em; }
+.lp-lede { margin-top: var(--sp-5); font-size: 18px; line-height: 1.55; color: var(--text-2); max-width: 32em; }
+.lp-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-6); align-items: center; }
+.lp-actions .hr-btn { text-decoration: none; }
+.lp-hero .hr-btn--quiet { text-decoration: underline; text-underline-offset: 4px; }
+.lp-stage { display: grid; justify-items: center; gap: var(--sp-4); }
+.lp-stage .hr-cred-stage { width: min(500px, 100%); }
+.lp-stage-note { font-size: var(--fs-1); color: var(--text-2); text-align: center; }
+
+/* The pain, one number. */
+.lp-pain { background: var(--surface); padding: var(--sp-8) clamp(16px, 6vw, 120px); }
+.lp-pain-main, .lp-pain-more { max-width: var(--content); margin: 0 auto; }
+.lp-pain-main { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-6); align-items: center; }
+.lp-big { font-size: 96px; line-height: 0.9; color: var(--accent); font-variant-numeric: tabular-nums; }
+.lp-pain-text { font-size: var(--fs-3); line-height: 1.45; color: var(--text); max-width: 30em; }
+.lp-pain small, .lp-pain-more small { display: block; margin-top: var(--sp-2); font-size: var(--fs-1); color: var(--text-2); }
+.lp-pain a { color: var(--accent); }
+.lp-pain-more { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-6); margin-top: var(--sp-7); padding-top: var(--sp-5); border-top: 1px solid var(--line); }
+.lp-pain-more dt { font-size: var(--fs-5); color: var(--text); line-height: 1; }
+.lp-pain-more dd { margin: var(--sp-2) 0 0; color: var(--text-2); max-width: 26em; }
+
+/* How it works: three steps, real screens, alternating sides. */
+.lp-steps { padding: var(--sp-8) clamp(16px, 6vw, 120px); }
+.lp-steps > h2 { font-size: 56px; line-height: 1; max-width: var(--content); margin: 0 auto var(--sp-7); }
+.lp-steps ol { list-style: none; margin: 0 auto; padding: 0; max-width: var(--content); display: grid; gap: var(--sp-8); }
+.lp-step { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: var(--sp-7); align-items: center; }
+.lp-step--flip .lp-step-text { order: 2; }
+.lp-step--phone { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
+.lp-step-n { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-size: var(--fs-4); }
+.lp-step h3 { font-size: var(--fs-5); line-height: 1; margin: var(--sp-4) 0 var(--sp-3); color: var(--text); }
+.lp-step p { color: var(--text-2); line-height: 1.6; margin-bottom: var(--sp-5); max-width: 30em; }
+.lp-step .hr-btn { text-decoration: none; }
+.lp-shot { margin: 0; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: var(--bg); }
+.lp-shot img { display: block; width: 100%; height: auto; }
+.lp-step--phone .lp-shot { max-width: 360px; justify-self: center; }
+
+/* The ask, again. */
+.lp-ask { background: var(--bg-2); padding: var(--sp-8) clamp(16px, 6vw, 120px); text-align: center; }
+.lp-ask h2 { font-size: var(--fs-5); line-height: 1; color: var(--text); }
+.lp-ask .lp-actions { justify-content: center; }
+
+.lp-foot { padding: var(--sp-6) clamp(16px, 6vw, 120px); font-size: var(--fs-1); color: var(--text-2); display: grid; gap: var(--sp-2); }
+.lp-foot strong { color: var(--text); }
+
+@media (max-width: 900px) {
+  .lp-hero { grid-template-columns: 1fr; gap: var(--sp-5); min-height: 0; padding-top: var(--sp-5); }
+  .lp-hero h1 { font-size: 46px; }
+  .lp-lede { font-size: var(--fs-2); margin-top: var(--sp-3); }
+  .lp-actions { margin-top: var(--sp-4); }
+  .lp-stage .hr-cred-stage { width: min(340px, 100%); }
+  .lp-pain-main { grid-template-columns: 1fr; gap: var(--sp-3); }
+  .lp-big { font-size: 72px; }
+  .lp-pain-text { font-size: 18px; }
+  .lp-pain-more { grid-template-columns: 1fr; }
+  .lp-steps > h2 { font-size: 38px; }
+  .lp-step, .lp-step--phone { grid-template-columns: 1fr; gap: var(--sp-5); }
+  .lp-step--flip .lp-step-text { order: 0; }
+}
+@media (max-width: 480px) {
+  .lp-actions .hr-btn--primary { width: 100%; }
+  .lp-ask .hr-btn { width: 100%; }
+}
