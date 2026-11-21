@@ -49,10 +49,17 @@ function AccesoFlow({ token }: { token: string }) {
         navigate(url.pathname);
       } catch { setError("Este QR no es una credencial. Escanea el de EIRA."); }
     }, () => {});
-    start.then(() => { if (stopped) void scanner.stop().then(() => scanner.clear()); })
-      .catch(() => { if (!stopped) { setError("No pudimos abrir la cámara. Usa el enlace de tu credencial."); setScanning(false); } });
-    return () => { stopped = true; if (scanner.isScanning) void scanner.stop().then(() => scanner.clear()); };
+    start.catch(() => { if (!stopped) { setError("No pudimos abrir la cámara. Usa el enlace de tu credencial."); setScanning(false); } });
+    return () => {
+      stopped = true;
+      void start.then(() => scanner.stop()).then(() => scanner.clear()).catch(() => {});
+    };
   }, [scanning, navigate]);
+
+  function chooseViewer(profile: string) {
+    setScanning(false);
+    setViewer(profile);
+  }
 
   async function run(action: () => Promise<void>) {
     const version = requestVersion.current;
@@ -94,8 +101,8 @@ function AccesoFlow({ token }: { token: string }) {
           <h2>¿Quién eres?</h2>
           <p>Credencial de {identity.paciente_nombre_corto}</p>
           <div className="access-actions">
-            <Button size="lg" block onClick={() => setViewer("paciente")}>Soy la paciente</Button>
-            {identity.contactos.map((contact) => <Button key={contact.id} size="lg" block variant="secondary" onClick={() => setViewer(contact.id)}>Soy {contact.nombre} ({contact.parentesco})</Button>)}
+            <Button size="lg" block onClick={() => chooseViewer("paciente")}>Soy la paciente</Button>
+            {identity.contactos.map((contact) => <Button key={contact.id} size="lg" block variant="secondary" onClick={() => chooseViewer(contact.id)}>Soy {contact.nombre} ({contact.parentesco})</Button>)}
           </div>
         </Card>}
         {viewer && !challenge && <Card><form onSubmit={send}>
