@@ -10,7 +10,7 @@ from app.main import app
 from app.services import store
 from app.services.sync import verify_chain
 
-client = TestClient(app)
+client = TestClient(app, headers={"X-Demo-Role": "capturista"})
 SNAPSHOT = f"/api/jornadas/{JORNADA['id']}/snapshot"
 
 
@@ -58,6 +58,9 @@ def test_snapshot_returns_tamazula_patients_only() -> None:
     assert any(e["tipo"] == "ultrasonido" and e["fecha"].startswith("2025-03") for e in maria["estudios"])
     assert all("qr_token" not in p for p in body["patients"]), "minimal data: the token never leaves the server"
     assert client.get("/api/jornadas/no-existe/snapshot").status_code == 404
+    assert client.get(SNAPSHOT, headers={"X-Demo-Role": "paciente"}).status_code == 403
+    assert TestClient(app).post("/api/sync", json=_new_patient_batch()).status_code == 403
+    assert TestClient(app).get("/api/patients/pat-maria/credential.png").status_code == 403
 
 
 def test_sync_is_idempotent_by_op_id() -> None:
@@ -140,3 +143,18 @@ def test_new_patient_gets_folio_and_opaque_qr_token() -> None:
     assert png.status_code == 200 and png.headers["content-type"] == "image/png"
     assert png.content[:8] == b"\x89PNG\r\n\x1a\n" and len(png.content) > 1000
     assert client.get("/api/patients/no-existe/credential.png").status_code == 404
+
+
+def test_sync_rejects_invalid_payloads_and_other_devices_local_ids() -> None:
+    client.post("/api/sync", json=_new_patient_batch())
+    other = client.post("/api/sync", json={"device_id": "tablet-otra", "ops": [
+        {"op_id": "x-1", "tipo": "contact.create", "payload": {
+            "local_id": "loc-1", "nombre": "Ajena", "parentesco": "hija", "telefono": "+523410000001", "consentimiento": True}},
+        {"op_id": "x-2", "tipo": "study.create", "payload": {"patient_id": "pat-maria", "tipo": "pap", "fecha": "2026-11-21"}},
+        {"op_id": "x-3", "tipo": "patient.create", "payload": {"local_id": "loc-9", "nombre": "Sin apellidos"}},
+    ]}).json()
+    assert other["applied"] == [] and [c["op_id"] for c in other["conflicts"]] == ["x-1", "x-2", "x-3"]
+    with store.session() as s:
+        assert s.exec(select(TrustedContact).where(TrustedContact.nombre == "Ajena")).first() is None
+        assert s.exec(select(Study).where(Study.tipo == "pap")).first() is None
+    assert client.get(SNAPSHOT).status_code == 200

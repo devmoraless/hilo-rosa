@@ -7,7 +7,7 @@ hash = sha256(prev_hash + canonical_json(actor, rol, accion, entidad_id, ts))).
 import hashlib
 import json
 from collections.abc import Iterable
-from typing import Any
+from typing import Any, get_args
 
 from sqlmodel import Session, select
 
@@ -22,7 +22,9 @@ from app.db import (
     now_iso,
 )
 from app.schemas import (
+    CanalAviso,
     CreatedPatient,
+    StudyType,
     SyncConflict,
     SyncOpIn,
     SyncRequest,
@@ -50,6 +52,11 @@ except ImportError:  # pragma: no cover - exercised only while HR-005 is not int
         return True, None
 
 
+REQUIRED_FIELDS = {
+    "patient.create": ("nombre", "apellidos", "fecha_nacimiento", "municipio"),
+    "contact.create": ("nombre", "parentesco", "telefono"),
+    "study.create": ("tipo", "fecha"),
+}
 UPDATABLE_FIELDS = {"nombre", "apellidos", "fecha_nacimiento", "municipio", "telefono", "telefono_propio", "canal_aviso"}
 
 
@@ -71,27 +78,29 @@ def record_audit(s: Session, actor: str, rol: str, accion: str, entidad_id: str)
     return row
 
 
-def _created_patient_id(s: Session, local_id: str) -> str | None:
+def _created_patient_id(s: Session, device_id: str, local_id: str) -> str | None:
     """Resolve a device-local patient id from any earlier patient.create (this or a past batch)."""
-    for op in s.exec(select(SyncOp).where(SyncOp.tipo == "patient.create", SyncOp.status == "applied")).all():
+    ops = select(SyncOp).where(SyncOp.device_id == device_id, SyncOp.tipo == "patient.create", SyncOp.status == "applied")
+    for op in s.exec(ops).all():
         payload = json.loads(op.payload)
         if payload.get("local_id") == local_id and payload.get("_patient_id"):
             return payload["_patient_id"]
     return None
 
 
-def _patient_for(s: Session, payload: dict[str, Any]) -> Patient:
-    pid = payload.get("patient_id") or (payload.get("local_id") and _created_patient_id(s, payload["local_id"]))
+def _patient_for(s: Session, device_id: str, payload: dict[str, Any]) -> Patient:
+    pid = payload.get("patient_id") or (payload.get("local_id") and _created_patient_id(s, device_id, payload["local_id"]))
     patient = s.get(Patient, pid) if pid else None
     if patient is None:
         raise Conflict("paciente desconocida: sincroniza primero su registro")
     return patient
 
 
-def _visit_for(s: Session, local_visit_id: str | None) -> str | None:
+def _visit_for(s: Session, device_id: str, local_visit_id: str | None) -> str | None:
     if not local_visit_id:
         return None
-    for op in s.exec(select(SyncOp).where(SyncOp.tipo == "visit.create", SyncOp.status == "applied")).all():
+    ops = select(SyncOp).where(SyncOp.device_id == device_id, SyncOp.tipo == "visit.create", SyncOp.status == "applied")
+    for op in s.exec(ops).all():
         payload = json.loads(op.payload)
         if payload.get("local_visit_id") == local_visit_id:
             return payload.get("_visit_id")
@@ -100,6 +109,13 @@ def _visit_for(s: Session, local_visit_id: str | None) -> str | None:
 
 def _apply(s: Session, device_id: str, op: SyncOpIn, stored: dict[str, Any]) -> tuple[str, CreatedPatient | None]:
     p = op.payload
+    missing = [f for f in REQUIRED_FIELDS.get(op.tipo, ()) if not p.get(f)]
+    if missing:
+        raise Conflict(f"faltan campos: {', '.join(missing)}")
+    if op.tipo == "study.create" and p["tipo"] not in get_args(StudyType):
+        raise Conflict(f"tipo de estudio no válido: {p['tipo']}")
+    if "canal_aviso" in p and p["canal_aviso"] not in get_args(CanalAviso):
+        raise Conflict(f"canal de aviso no válido: {p['canal_aviso']}")
     if op.tipo == "patient.create":
         patient = Patient(
             folio=credential.new_folio(s),
@@ -118,7 +134,7 @@ def _apply(s: Session, device_id: str, op: SyncOpIn, stored: dict[str, Any]) -> 
         created = CreatedPatient(local_id=p.get("local_id", ""), id=patient.id, folio=patient.folio, qr_token=patient.qr_token)
         return patient.id, created
     if op.tipo == "patient.update":
-        patient = _patient_for(s, p)
+        patient = _patient_for(s, device_id, p)
         if op.base_version is None:
             raise Conflict("base_version requerida para actualizar", patient.version)
         if op.base_version != patient.version:
@@ -130,7 +146,7 @@ def _apply(s: Session, device_id: str, op: SyncOpIn, stored: dict[str, Any]) -> 
         s.add(patient)
         return patient.id, None
     if op.tipo == "contact.create":
-        patient = _patient_for(s, p)
+        patient = _patient_for(s, device_id, p)
         if not p.get("consentimiento", False):
             raise Conflict("sin consentimiento de la paciente no se registra el contacto")
         contact = TrustedContact(patient_id=patient.id, nombre=p["nombre"], parentesco=p["parentesco"], telefono=p["telefono"])
@@ -138,15 +154,15 @@ def _apply(s: Session, device_id: str, op: SyncOpIn, stored: dict[str, Any]) -> 
         s.flush()
         return contact.id, None
     if op.tipo == "visit.create":
-        patient = _patient_for(s, p)
+        patient = _patient_for(s, device_id, p)
         visit = Visit(id=new_id(), patient_id=patient.id, jornada_id=p.get("jornada_id"), device_id=device_id)
         s.add(visit)
         s.flush()
         stored["_visit_id"] = visit.id
         return visit.id, None
     if op.tipo == "study.create":
-        patient = _patient_for(s, p)
-        study = Study(patient_id=patient.id, visit_id=_visit_for(s, p.get("local_visit_id")), tipo=p["tipo"], fecha=p["fecha"])
+        patient = _patient_for(s, device_id, p)
+        study = Study(patient_id=patient.id, visit_id=_visit_for(s, device_id, p.get("local_visit_id")), tipo=p["tipo"], fecha=p["fecha"])
         s.add(study)
         s.flush()
         return study.id, None
@@ -172,9 +188,9 @@ def apply_batch(s: Session, req: SyncRequest, actor: str = "capturista") -> Sync
             continue
         stored: dict[str, Any] = dict(op.payload)
         try:
-            with s.begin_nested():
-                entity_id, created = _apply(s, req.device_id, op, stored)
+            entity_id, created = _apply(s, req.device_id, op, stored)
         except Conflict as c:
+            s.rollback()  # every Conflict is raised before the op writes anything
             s.add(SyncOp(op_id=op.op_id, device_id=req.device_id, tipo=op.tipo, payload=json.dumps(stored, ensure_ascii=False), base_version=op.base_version, status="conflict"))
             record_audit(s, req.device_id, actor, f"{op.tipo}.conflict", op.op_id)
             out.conflicts.append(SyncConflict(op_id=op.op_id, reason=c.reason, server_version=c.server_version))
