@@ -22,7 +22,7 @@ const CSS = `
 .bt-seal small { display: block; font-size: var(--fs-1); font-weight: 400; color: var(--text-2); margin-top: var(--sp-1); }
 .bt-list { list-style: none; margin: 0; padding: 0; display: grid; }
 .bt-row { display: grid; grid-template-columns: 8.5em minmax(0, 1fr) auto; gap: var(--sp-2) var(--sp-4); align-items: baseline; padding: var(--sp-3) 0; border-top: 1px solid var(--line); }
-.bt-row--bad { background: color-mix(in srgb, var(--bad) 8%, transparent); border-left: 4px solid var(--bad); padding-left: var(--sp-3); }
+.bt-row--bad { background: color-mix(in srgb, var(--bad) 8%, transparent); outline: 2px solid var(--bad); outline-offset: -2px; border-radius: var(--r-sm); padding-inline: var(--sp-3); }
 .bt-when { color: var(--text-2); font-size: var(--fs-1); font-variant-numeric: tabular-nums; }
 .bt-what { min-width: 0; overflow-wrap: anywhere; }
 .bt-what strong { display: block; font-weight: 600; }

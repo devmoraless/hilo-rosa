@@ -22,9 +22,9 @@ export function actionLabel(e: AuditEntry): string {
 }
 
 export function integritySeal(r: AuditResponse): Seal {
-  if (r.integridad_ok) return { ok: true, text: 'Integridad ✅ · la cadena de hashes no fue alterada', badIndex: null };
+  if (r.integridad_ok) return { ok: true, text: 'Integridad ✅ · la cadena de hashes no fue alterada', badIndex: null }; // design-lint: ok (texto literal del criterio HR-015)
   const bad = r.primer_registro_alterado ?? 0;
-  return { ok: false, text: `⚠ Registro alterado en la entrada ${bad + 1}`, badIndex: bad };
+  return { ok: false, text: `⚠ Registro alterado en la entrada ${bad + 1}`, badIndex: bad }; // design-lint: ok (texto literal del criterio HR-015)
 }
 
 export function newestFirst(entries: AuditEntry[]): Row[] {
