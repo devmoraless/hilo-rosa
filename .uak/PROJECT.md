@@ -8,8 +8,8 @@
 |---|---|
 | Event / challenge | Vibeathon Nerdearla México 2026 · Reto 4 (entrega digital segura de resultados de Papanicolaou) sobre la base del Reto 1 (expediente único + offline) · retos de EIRA (https://eiraac.org/) |
 | Start | 2026-11-21 10:30 America/Mexico_City |
-| Official deadline | 2026-11-21 15:30 America/Mexico_City (código) · envío a Devpost 16:00 · platforms: Devpost + repo público GitHub `devmoraless/hilo-rosa` (MIT) |
-| Freeze | 14:45 (`Freeze-Epoch: 1795293900`) · el setup arrancó tarde (11:46): wave 1 sale ya |
+| Official deadline | 2026-11-21 16:00 America/Mexico_City (código, extendido +30 min) · envío a Devpost (confirmar hora) · platforms: Devpost + repo público GitHub `devmoraless/hilo-rosa` (MIT) |
+| Freeze | 15:15 (`Freeze-Epoch: 1795295700`, +30 min: el evento se extendió) · el setup arrancó tarde (11:46): wave 1 sale ya |
 | Clean rehearsal / plan B | 15:06 · video plan B v1 a las 13:00, final a las 15:20 |
 | Internal submission | 15:15 |
 | Humans | devmoraless: único humano · submission owner: devmoraless |
@@ -46,7 +46,7 @@ Autonomy: yes
 Auto-Merge: yes
 Review-Mode: claims
 Plan-Channel: claims
-Freeze-Epoch: 1795293900
+Freeze-Epoch: 1795295700
 Lease-Seconds: 2700
 Review-Lease-Seconds: 14400
 Events-Per-Session: 100
