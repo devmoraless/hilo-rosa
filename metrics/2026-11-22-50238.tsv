@@ -1,0 +1,6 @@
+# ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
+1795305388	status	-	0	-	18775	-	claude-code
+1795305410	followup	HR-001	0	-	9747	dm-6	claude-code
+1795305420	followup	HR-012	0	-	9319	dm-6	claude-code
+1795305429	followup	HR-008	0	-	8506	dm-6	claude-code
+1795305456	claim	HR-019	3	freeze	7941	dm-6	claude-code
